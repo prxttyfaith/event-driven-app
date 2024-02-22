@@ -44,6 +44,9 @@ ul {
 }
 
 li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   background-color: #f4f4f4;
   padding: 10px;
   margin-bottom: 5px;
@@ -52,4 +55,18 @@ li {
 
 li:hover {
   background-color: #e0e0e0;
+}
+
+.delete-button {
+  margin-left: 10px;
+  padding: 5px 10px;
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.delete-button:hover {
+  background-color: #bd2130;
 }

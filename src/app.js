@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const App = () => {
   const [tasks, setTasks] = useState([]);
@@ -24,6 +25,20 @@ const App = () => {
       })
       .catch(error => console.error('Error fetching data:', error));
   };
+  // const fetchTasks = async () => {
+  //   try {
+  //     const response = await axios.get('http://localhost:3000/to-do-list');
+  //     console.log(response.data);
+  //     // setTasks(response.data);
+  //     setTasks(response.data.tasks)
+  //   } catch (error) {
+  //     console.error('Error fetching tasks:', error);
+  //   }
+  // };
+
+  const handleInputChange = (event) => {
+    setTaskInput(event.target.value);
+  };
 
   const handleAddTask = () => {
     if (!taskInput.trim()) return;
@@ -47,21 +62,42 @@ const App = () => {
       .catch(error => console.error('Error adding task:', error));
   };
 
+  const handleDeleteTask = (id) => {
+    const updatedTasks = tasks.filter((_, i) => i !== id);
+    fetch('http://localhost:3000/to-do-list/{$id}', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ name: taskInput }),
+    })
+    setTasks(updatedTasks);
+  };
+
+
   return (
     <div>
       <div>
         <input
           type="text"
-          value={taskInput}
-          onChange={e => setTaskInput(e.target.value)}
+          className="task-input"
           placeholder="Enter new task..."
+          value={taskInput}
+          onChange={handleInputChange}
         />
-        <button onClick={handleAddTask}>Add Task</button>
+        <button className="add-button" onClick={handleAddTask}>
+          Add Task
+        </button>
       </div>
       <ul>
-        {tasks.map(task => (
-          <li key={task.id}>{task.name}</li>
-        ))}
+      {tasks.map((task, id) => (
+        <li key={id}>
+          {task.name}
+          <button onClick={() => handleDeleteTask(id)} className="delete-button">
+            Delete
+          </button>
+        </li>
+      ))}
       </ul>
     </div>
   );
