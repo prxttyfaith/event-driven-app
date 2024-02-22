@@ -6,7 +6,7 @@ const App = () => {
   useEffect(() => {
     fetch('http://localhost:3000/to-do-list')
       .then(response => response.json())
-      .then(data => setTasks(data))
+      .then(data => setTasks(data.data))
       .catch(error => console.error('Error fetching data:', error));
   }, []);
 
