@@ -25,21 +25,12 @@ const App = () => {
       })
       .catch(error => console.error('Error fetching data:', error));
   };
-  // const fetchTasks = async () => {
-  //   try {
-  //     const response = await axios.get('http://localhost:3000/to-do-list');
-  //     console.log(response.data);
-  //     // setTasks(response.data);
-  //     setTasks(response.data.tasks)
-  //   } catch (error) {
-  //     console.error('Error fetching tasks:', error);
-  //   }
-  // };
 
   const handleInputChange = (event) => {
     setTaskInput(event.target.value);
   };
 
+  // Add task to the list
   const handleAddTask = () => {
     if (!taskInput.trim()) return;
     fetch('http://localhost:3000/to-do-list', {
@@ -62,18 +53,55 @@ const App = () => {
       .catch(error => console.error('Error adding task:', error));
   };
 
-  const handleDeleteTask = (id) => {
-    const updatedTasks = tasks.filter((_, i) => i !== id);
-    fetch('http://localhost:3000/to-do-list/{$id}', {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ name: taskInput }),
-    })
-    setTasks(updatedTasks);
+  function onClick(id) {
+    const taskExists = tasks.some(task => task.id === id);
+  
+    if (taskExists) {
+      handleDeleteTask(id);
+    } else {
+      console.error(`Task with id ${id} does not exist.`);
+    }
+  }
+
+  // Delete a task by its id
+  const handleDeleteTask = async (idToDelete) => {
+    try {
+      // Make a DELETE request to the API endpoint
+      await axios.delete(`http://localhost:3000/to-do-list/${idToDelete}`);
+      
+      // Remove the deleted task from the tasks state
+      setTasks(tasks.filter(task => task.id !== idToDelete));
+      
+      console.log(`Task with id ${idToDelete} deleted successfully.`);
+    } catch (error) {
+      console.error('Error deleting task:', error);
+    }
   };
 
+  const handleEditTask = async (idToEdit) => {
+    try {
+      // Find the task with the given ID
+      const taskToEdit = tasks.find(task => task.id === idToEdit);
+
+      // Prompt the user for the new task name, with the current name as the default value
+      const newTaskName = prompt('Edit task:', taskToEdit.name);
+
+      // Naay bug dire, so if the user cancelled the prompt, don't proceed with the edit
+      if (newTaskName === null) {
+        return;
+      }
+
+      // Make a PUT request to the API endpoint
+      await axios.put(`http://localhost:3000/to-do-list/${idToEdit}`, { name: newTaskName });
+
+      // Update the task in the tasks state
+      setTasks(tasks.map(task => task.id === idToEdit ? { ...task, name: newTaskName } : task));
+
+      console.log(`Task with id ${idToEdit} edited successfully.`);
+    } catch (error) {
+      console.error('Error editing task:', error);
+    }
+  };
 
   return (
     <div>
@@ -88,19 +116,25 @@ const App = () => {
         <button className="add-button" onClick={handleAddTask}>
           Add Task
         </button>
+        {/* <div class="tasks-lists-container">
+          <div class="task-names">Task</div>
+           <div class="task-actions">Action</div>
+        </div> */}
       </div>
       <ul>
-      {tasks.map((task, id) => (
-        <li key={id}>
-          {task.name}
-          <button onClick={() => handleDeleteTask(id)} className="delete-button">
-            Delete
-          </button>
-        </li>
-      ))}
+        {tasks.map(task => (
+          <li key={task.id}>
+            {task.name}
+            <div class="tasks-lists-container">
+            <button className="edit-button" onClick={() => handleEditTask(task.id)}>Edit</button>
+            <button className="delete-button" onClick={() => handleDeleteTask(task.id)}>Delete</button>
+            </div>
+          </li>
+        ))}
       </ul>
     </div>
   );
+  
 };
 
 export default App;
