@@ -78,6 +78,7 @@ const App = () => {
     }
   };
 
+  // edit task on the list
   const handleEditTask = async (idToEdit) => {
     try {
       // Find the task with the given ID
@@ -121,7 +122,7 @@ const App = () => {
            <div class="task-actions">Action</div>
         </div> */}
       </div>
-      <ul>
+      <ul id="list">
         {tasks.map(task => (
           <li key={task.id}>
             {task.name}

@@ -6,8 +6,8 @@ body {
 }
 
 header {
-  background-color: #333;
-  color: white;
+  background-color: #0662b2;
+  color: rgb(255, 255, 255);
   padding: 1em;
   text-align: center;
 }
@@ -37,7 +37,7 @@ h1 {
   padding: 10px 20px;
   margin-left: 10px;
   border: none;
-  background-color: #0275d8;
+  background-color: #0275d8; 
   color: #fff;
   border-radius: 5px;
   cursor: pointer;
@@ -78,7 +78,7 @@ li {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #f4f4f4;
+  background-color: #0274d80f;
   padding: 10px;
   margin-bottom: 5px;
   border-radius: 5px;
@@ -114,4 +114,9 @@ li:hover {
 
 .delete-button:hover {
   background-color: #d9534f;
+}
+
+#list {
+  overflow-y: auto;
+  max-height: 500px;
 }
