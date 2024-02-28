@@ -43,9 +43,11 @@ const EmployeeList = () => {
                   {employee.state} 
                   {employee.country}
                   {employee.zip_code} 
-                  {employee.designation_id}
                   {employee.employee_type}
                   {employee.status}
+                  {employee.designation_id}
+                  {employee.designation_name}
+                  {employee.department_name}
                   
                   <div className="tasks-lists-container">
                     {/* <button className="edit-button" onClick={() => handleEditTask(task.id)}>Edit</button>

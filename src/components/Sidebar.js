@@ -12,7 +12,7 @@ const Sidebar = () => {
 
   return (
     <div className={`home-container ${collapsed ? 'collapsed' : ''}`}>
-      <div className="sidebar" style={{ width: collapsed ? '50px' : '250px' }}>
+      <div className="sidebar" style={{ width: collapsed ? '50px' : '180px' }}>
         <div className="sidebar-header" onClick={toggleSidebar}>
           <h2 className="sidebar-heading">
             EDP
@@ -29,7 +29,7 @@ const Sidebar = () => {
           <li className="sidebar-menu-item">
             <Link to="/create-employee">Employee Manager</Link>
           </li>
-          <div className={`sidebar-submenu ${collapsed ? 'collapsed' : ''}`}>
+          <div className={`sidebar-menu-item ${collapsed ? 'collapsed' : ''}`}>
             <ul style={{ paddingLeft: '20px' }}>
                 <li><Link to="/employee-manager/create-employee">Create Employee</Link></li>
                 <li><Link to="/employee-manager/employee-list">Employee List</Link></li>
