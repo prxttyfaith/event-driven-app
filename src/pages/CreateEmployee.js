@@ -4,7 +4,7 @@ import axios from 'axios';
 import '../styles/EmployeeManager.css';
 import Sidebar from '../components/Sidebar';
 
-function EmployeeManager() {
+function CreateEmployee() {
   const [formData, setFormData] = useState({
     first_name: '',
     middle_name: '',
@@ -14,7 +14,10 @@ function EmployeeManager() {
     city: '',
     state: '',
     country: '',
-    zip_code: ''
+    zip_code: '',
+    designation_id: '',
+    employee_type: '',
+    status: ''
   });
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -43,7 +46,10 @@ function EmployeeManager() {
         city: '',
         state: '',
         country: '',
-        zip_code: ''
+        zip_code: '',
+        designation_id: '',
+        employee_type: '',
+        status: ''
       }); // Reset form fields upon successful submission
       setErrorMessage('');
     } catch (error) {
@@ -162,11 +168,44 @@ function EmployeeManager() {
             placeholder="Zip Code" 
           />
         </div>
+
+        <div>
+          <label>Designation</label>
+          <input 
+            type="text" 
+            name="designation_id" 
+            value={formData.designation_id} 
+            onChange={handleInputChange} 
+            placeholder="Designation" 
+          />
+        </div>
         
+        <div>
+          <label>Employee Type</label>
+          <input 
+            type="text" 
+            name="employee_type" 
+            value={formData.employee_type} 
+            onChange={handleInputChange} 
+            placeholder="Employee Type" 
+          />
+        </div>
+
+        <div>
+          <label>Status</label>
+          <input 
+            type="text" 
+            name="status" 
+            value={formData.status} 
+            onChange={handleInputChange} 
+            placeholder="Status" 
+          />
+        </div>
+
         <button type="submit">Submit</button>
       </form>
     </div>
   );
 }
 
-export default EmployeeManager;
+export default CreateEmployee;

@@ -16,19 +16,14 @@ const TaskManager = () => {
   }, []);
 
   const fetchTasks = () => {
-    fetch('http://localhost:3000/to-do-list')
+    axios.get('http://localhost:3000/to-do-list')
       .then(response => {
         console.log('API Response:', response);
-        if (!response.ok) {
-          throw new Error('Failed to fetch data');
-        }
-        return response.json();
+        setTasks(response.data.data);
       })
-      .then(data => {
-        console.log('API Data:', data);
-        setTasks(data.data);
-      })
-      .catch(error => console.error('Error fetching data:', error));
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
   };
 
   const handleInputChange = (event) => {
