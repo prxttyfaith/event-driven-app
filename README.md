@@ -4,7 +4,12 @@ Event Driven Programming Projects
 git clone
 
 npm install
-npm run start
+
+# development mode
+npm start
+
+# production
+npm run build
 
 
 - node-api

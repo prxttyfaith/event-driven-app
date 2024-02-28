@@ -1,7 +1,12 @@
+
+// ./src/pages/TaskManager.js
+
+import '../styles/TaskManager.css';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Sidebar from '../components/Sidebar';
 
-const App = () => {
+const TaskManager = () => {
   const [tasks, setTasks] = useState([]);
   const [taskInput, setTaskInput] = useState('');
 
@@ -106,36 +111,38 @@ const App = () => {
 
   return (
     <div>
-      <div>
-        <input
-          type="text"
-          className="task-input"
-          placeholder="Enter new task..."
-          value={taskInput}
-          onChange={handleInputChange}
-        />
-        <button className="add-button" onClick={handleAddTask}>
-          Add Task
-        </button>
-        {/* <div class="tasks-lists-container">
-          <div class="task-names">Task</div>
-           <div class="task-actions">Action</div>
-        </div> */}
+      <Sidebar />
+      <center>
+          {/* <h1>EDP</h1> */}
+          <h2>Task Manager</h2>
+      </center>
+      <div className="todo-container">
+        <div>
+          <input
+            type="text"
+            className="task-input"
+            placeholder="Enter new task..."
+            value={taskInput}
+            onChange={handleInputChange}
+          />
+          <button className="add-button" onClick={handleAddTask}>
+            Add Task
+          </button>
+        </div>
+        <ul id="list">
+          {tasks.map(task => (
+            <li key={task.id}>
+              {task.name}
+              <div className="tasks-lists-container">
+                <button className="edit-button" onClick={() => handleEditTask(task.id)}>Edit</button>
+                <button className="delete-button" onClick={() => handleDeleteTask(task.id)}>Delete</button>
+              </div>
+            </li>
+          ))}
+        </ul>
       </div>
-      <ul id="list">
-        {tasks.map(task => (
-          <li key={task.id}>
-            {task.name}
-            <div class="tasks-lists-container">
-            <button className="edit-button" onClick={() => handleEditTask(task.id)}>Edit</button>
-            <button className="delete-button" onClick={() => handleDeleteTask(task.id)}>Delete</button>
-            </div>
-          </li>
-        ))}
-      </ul>
     </div>
   );
-  
 };
 
-export default App;
+export default TaskManager;

@@ -1,22 +1,36 @@
-const HtmlWebPackPlugin = require("html-webpack-plugin");
-const htmlPlugin = new HtmlWebPackPlugin({
-    template: "./public/index.html",
-    filename: "./index.html"
-});
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 module.exports = {
-    mode: 'development',
-    module: {
-        rules: [{
-            test: /\.js$/,
-            exclude: /node_modules/,
-            use: {
-                loader: "babel-loader"
+  entry: './src/index.js',
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'bundle.js',
+    publicPath: '/'
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader'
         }
- },
-  {
-    test: /\.css$/,
-        use: ["style-loader", "css-loader"]
-}
-]},
-plugins: [htmlPlugin]
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
+      }
+    ]
+  },
+  devServer: {
+    historyApiFallback: true,
+    hot: true
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './public/index.html',
+      filename: './index.html'
+    })
+  ]
 };

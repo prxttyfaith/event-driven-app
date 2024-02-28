@@ -2,8 +2,9 @@
 
 const PathConstants = {
     HOME: "/",
-    TASKMANAGER: "task-manager",
-    EMPLOYEEMANAGER: "employee-manager"
-}
+    TASKMANAGER: "/task-manager",
+    EMPLOYEEMANAGER: "/employee-manager",
+    CREATEEMPLOYEE: "/employee-manager/create-employee",
+};
 
-export default PathConstants
+export default PathConstants;

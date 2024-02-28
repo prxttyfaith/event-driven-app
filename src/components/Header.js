@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 import "../styles/Header.css"
-import PathConstants from "../routes/pathConstants";
+import PathConstants from "../routes/PathConstants";
 
 export default function Header() {
     return (

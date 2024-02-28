@@ -58,8 +58,8 @@ function EmployeeManager() {
     <div>
       <Sidebar />
       <center>
-        <h1>EDP</h1>
-        <h2><center>Employee Manager</center></h2>
+        {/* <h1>EDP</h1> */}
+        <h2><center>Create Employee</center></h2>
       </center>
       {loading && <div>Loading...</div>}
       {errorMessage && <div className="error">{errorMessage}</div>}
