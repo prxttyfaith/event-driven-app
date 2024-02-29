@@ -2,88 +2,151 @@
 
 /* Style for the form container */
 form {
-    width: 400px; 
-    margin: 0 auto; 
-  }
-  
-  /* Style for form labels */
-  label {
-    display: block; 
-    margin-bottom: 5px; /* Add some space below each label */
-  }
-  
-  /* Style for input fields */
-  input {
-    width: 100%; 
-    padding: 8px; 
-    margin-bottom: 10px; 
-    box-sizing: border-box; /* Include padding and border in the element's total width and height */
-  }
-  
-  /* Style for the submit button */
-  button[type="submit"] {
-    width: 100%; /* Make the button fill the container width */
-    padding: 10px; /* Add some padding */
-    background-color: #007bff; /* Set background color */
-    color: #fff; /* Set text color */
-    border: none; /* Remove border */
-    cursor: pointer; /* Show pointer cursor on hover */
-  }
-  
-  /* Style for error messages */
-  .error {
-    color: red; /* Set error message color */
-    margin-top: 5px; /* Add some space above the error message */
-  }
-  
+  width: 400px; /* Adjust width as needed */
+  margin: 0 auto; /* Center the form horizontally */
+}
+
+/* Style for form labels */
+label {
+  display: block; /* Display labels as block elements */
+  margin-bottom: 5px; /* Add some space below each label */
+}
+
+/* Style for input fields */
+input {
+  width: 100%; /* Make input fields fill the container width */
+  padding: 8px; /* Add some padding */
+  margin-bottom: 10px; /* Add some space below each input field */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+/* Style for the submit button */
+button[type="submit"] {
+  width: 100%; /* Make the button fill the container width */
+  padding: 10px; /* Add some padding */
+  background-color: #007bff; /* Set background color */
+  color: #fff; /* Set text color */
+  border: none; /* Remove border */
+  cursor: pointer; /* Show pointer cursor on hover */
+}
+
+/* Style for error messages */
+.error {
+  color: red; /* Set error message color */
+  margin-top: 5px; /* Add some space above the error message */
+}
+
+
 /* for src/Pages/EmployeeList.js */
 .employee-list-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
+display: flex;
+justify-content: center;
+align-items: center;
+height: 100%;
 }
 
 .employee-list {
-  max-width: 1200px;
-  margin: 20px;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
+max-width: 1200px;
+margin: 20px;
+padding: 20px;
+border: 1px solid #ccc;
+border-radius: 8px;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+background-color: #fff;
 }
 
 .employee-list h2 {
-  font-size: 24px;
-  margin-bottom: 20px;
+font-size: 24px;
+margin-bottom: 20px;
 }
 
 .employee-list table {
-  width: 100%;
-  border-collapse: collapse;
+width: 100%;
+border-collapse: collapse;
 }
 
 .employee-list th,
 .employee-list td {
-  padding: 8px 12px;
-  border: 1px solid #ccc;
+padding: 8px 12px;
+border: 1px solid #ccc;
 }
 
 .employee-list th {
-  background-color: #f0f0f0;
-  font-weight: bold;
-  text-align: left;
+background-color: #f0f0f0;
+font-weight: bold;
+text-align: left;
 }
 
 .employee-list td {
-  text-align: left;
+text-align: left;
 }
 
 .employee-list tbody tr:nth-child(even) {
-  background-color: #f9f9f9;
+background-color: #f9f9f9;
 }
 
 .employee-list tbody tr:hover {
-  background-color: #f0f0f0;
+background-color: #f0f0f0;
+}
+
+.edit-modal {
+display: none;
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(0, 0, 0, 0.5);
+z-index: 1000;
+overflow: auto;
+}
+
+.edit-modal.show {
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+.modal-content {
+max-width: 90%;
+max-height: 90%;
+overflow: auto;
+background-color: white;
+padding: 20px;
+border-radius: 8px;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.modal-content h2 {
+margin-bottom: 20px;
+text-align: center;
+}
+
+.modal-content label {
+display: block;
+margin-bottom: 10px;
+}
+
+.modal-content input {
+width: 100%;
+padding: 10px;
+margin-top: 5px;
+margin-bottom: 15px;
+border-radius: 4px;
+border: 1px solid #ccc;
+}
+
+.modal-content button {
+display: block;
+width: 100%;
+padding: 12px;
+border: none;
+border-radius: 4px;
+background-color: #007bff;
+color: white;
+cursor: pointer;
+}
+
+.modal-content button:hover {
+background-color: #0056b3;
 }
