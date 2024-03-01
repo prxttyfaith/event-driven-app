@@ -15,7 +15,7 @@ const Home = () => {
       <div className="hero-section">
         <div className="hero-content">
           <h1>Welcome to EDP</h1>
-          <p>Empower our project with our Event Driven Programming solutions. :)</p>
+          <p>Empower our project using Event Driven Programming solutions. :)</p>
           <div className="cta-buttons">
             <Link to="/task-manager" className="cta-button">Task Manager</Link>
             <Link to="/employee-manager" className="cta-button">Employee Manager</Link>

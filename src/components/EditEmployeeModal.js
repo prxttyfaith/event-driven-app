@@ -28,17 +28,31 @@ const EditModal = ({ isOpen, onClose, onSave, rowData }) => {
     };
 
     const handleFieldChange = (field, value) => {
-        setEditedData(prevData => ({
-            ...prevData,
+        // setEditedData(prevData => ({
+        //     ...prevData,
+        //     [field]: value
+        // }));
+        let updatedData = {
+            ...editedData,
             [field]: value
-        }));
+        };
+    
+        if (field === 'designation_name') {
+            const selectedDesignation = designations.find(d => d.designation_name === value);
+            if (selectedDesignation) {
+                updatedData.department_name = selectedDesignation.department_name;
+            } else {
+                updatedData.department_name = '';               
+            }
+        }  
+        setEditedData(updatedData);
     };
 
     const handleSave = (e) => {       
         e.preventDefault();
-            // Find the selected designation from the designations array
-    const selectedDesignation = designations.find(d => d.designation_name === editedData.designation_name);
-    if (selectedDesignation) {
+        // Find the selected designation from the designations array
+        const selectedDesignation = designations.find(d => d.designation_name === editedData.designation_name);
+        if (selectedDesignation) {
         // If a matching designation is found, update the designation_id in the editedData
         editedData.designation_id = selectedDesignation.id;
     }

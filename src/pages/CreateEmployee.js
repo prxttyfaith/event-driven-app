@@ -39,7 +39,6 @@ function CreateEmployee() {
     }
   };
 
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     if (name === 'designation_name') {
@@ -219,10 +218,14 @@ function CreateEmployee() {
 
           {formData.department_name && (
             <div> 
-              <span>
-                <label>Department: {formData.department_name} </label>
-                {/* {formData.department_name} */}
-              </span>
+                <label htmlFor="department_name">Department:</label>
+                <input 
+                  // type="text" 
+                  name="department_name" 
+                  value={formData.department_name} 
+                  onChange={e => handleInputChange('department_name', e.target.value)}
+                  disabled 
+                />
             </div>
           )}
         </div>
