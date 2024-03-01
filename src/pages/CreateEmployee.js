@@ -39,29 +39,6 @@ function CreateEmployee() {
     }
   };
 
-  // const handleInputChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setFormData({
-  //     ...formData,
-  //     [name]: value
-  //   });
-  //   const selectedDesignation = designations.find((designation) => designation.designation_name === value);
-  //   if (selectedDesignation) {
-  //     // setFormData((prevData) => ({
-  //     //   ...prevData,
-  //     //   department_name: selectedDesignation.department_name
-  //     // }));
-  //     setFormData({
-  //       ...formData,
-  //       department_name: selectedDesignation.department_name  
-  //     });
-  //   } else {
-  //     setFormData({
-  //       ...formData,
-  //       department_name: ''
-  //     });
-  //   }
-  // };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;

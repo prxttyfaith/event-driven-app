@@ -1,9 +1,10 @@
 
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const EditModal = ({ isOpen, onClose, onSave, rowData }) => {
     const [editedData, setEditedData] = useState({});
-    const [designations, setDesignations] = useState('');
+    const [designations, setDesignations] = useState([]);
 
     useEffect(() => {
         // Populate editedData with rowData when the modal is opened
@@ -13,18 +14,18 @@ const EditModal = ({ isOpen, onClose, onSave, rowData }) => {
 
     useEffect(() => {
         fetchDesignations();
-      }, []);
+    }, []);
 
     const fetchDesignations = async () => {
         try {
-          const response = await axios.get('http://localhost:3000/employee-designations');
-          console.log('Designations:', response.data);
-          setDesignations(response.data.data);
+            const response = await axios.get('http://localhost:3000/employee-designations');
+            console.log('Designations:', response.data);
+            setDesignations(response.data.data);
         } catch (error) {
-          console.error('Error fetching designations:', error);
-          setDesignations([]);
+            console.error('Error fetching designations:', error);
+            setDesignations([]);
         }
-      };
+    };
 
     const handleFieldChange = (field, value) => {
         setEditedData(prevData => ({
@@ -33,7 +34,7 @@ const EditModal = ({ isOpen, onClose, onSave, rowData }) => {
         }));
     };
 
-    const handleSave = (e) => {
+    const handleSave = (e) => {       
         e.preventDefault();
         onSave(editedData);
         onClose();
@@ -119,10 +120,11 @@ const EditModal = ({ isOpen, onClose, onSave, rowData }) => {
                     <label>
                         Designation:
                         <select
-                            name="designation_name"
-                            value={editedData.designation_name}
-                            onChange={handleFieldChange}
-                        >
+                        name="designation_name"
+                        value={editedData.designation_name}
+                        onChange={(e) => handleFieldChange('designation_name', e.target.value)}
+                    >
+
                             <option value="">Select Designation</option>
                             {designations.length > 0 && (
                                 designations.map((designation) => (
@@ -143,27 +145,27 @@ const EditModal = ({ isOpen, onClose, onSave, rowData }) => {
                     </label>
                     <label>
                         Type:
-                        <select 
-                        name="employee_type" 
-                        value={editedData.employee_type}
-                        onChange={(e) => handleFieldChange('employee_type', e.target.value)}         
+                        <select
+                            name="employee_type"
+                            value={editedData.employee_type}
+                            onChange={(e) => handleFieldChange('employee_type', e.target.value)}
                         >
-                    <option value="">Select Employee Type</option>
-                    <option value="Full-time">Full-time</option>
-                    <option value="Part-time">Part-time</option>          
-                    </select>
+                            <option value="">Select Employee Type</option>
+                            <option value="Full-time">Full-time</option>
+                            <option value="Part-time">Part-time</option>
+                        </select>
                     </label>
                     <label>
                         Status:
                         <select
-                        name="status"
-                        value={editedData.status}
-                        onChange={(e) => handleFieldChange('status', e.target.value)}
+                            name="status"
+                            value={editedData.status}
+                            onChange={(e) => handleFieldChange('status', e.target.value)}
                         >
-                        <option value="">Select Status</option>
-                        <option value="Active">Active</option>
-                        <option value="Resigned">Resigned</option>
-                        <option value="AWOL">AWOL</option>
+                            <option value="">Select Status</option>
+                            <option value="Active">Active</option>
+                            <option value="Resigned">Resigned</option>
+                            <option value="AWOL">AWOL</option>
                         </select>
                     </label>
 
