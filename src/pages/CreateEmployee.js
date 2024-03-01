@@ -18,6 +18,7 @@ function CreateEmployee() {
     designation_id: '',
     employee_type: '',
     status: ''
+    // department_name: ''
   });
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -38,12 +39,45 @@ function CreateEmployee() {
     }
   };
 
+  // const handleInputChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setFormData({
+  //     ...formData,
+  //     [name]: value
+  //   });
+  //   const selectedDesignation = designations.find((designation) => designation.designation_name === value);
+  //   if (selectedDesignation) {
+  //     // setFormData((prevData) => ({
+  //     //   ...prevData,
+  //     //   department_name: selectedDesignation.department_name
+  //     // }));
+  //     setFormData({
+  //       ...formData,
+  //       department_name: selectedDesignation.department_name  
+  //     });
+  //   } else {
+  //     setFormData({
+  //       ...formData,
+  //       department_name: ''
+  //     });
+  //   }
+  // };
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value
-    });
+    if (name === 'designation_name') {
+      const selectedDesignation = designations.find((designation) => designation.designation_name === value);
+      setFormData({
+        ...formData,
+        [name]: value,
+        department_name: selectedDesignation ? selectedDesignation.department_name : ''
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value
+      });
+    }
   };
 
   const onSubmit = async (e) => {
@@ -206,30 +240,43 @@ function CreateEmployee() {
             )}
           </select>
 
+          {formData.department_name && (
+            <div> 
+              <span>
+                <label>Department: {formData.department_name} </label>
+                {/* {formData.department_name} */}
+              </span>
+            </div>
+          )}
         </div>
         
         <div>
           <label>Employee Type</label>
-          <input 
-            type="text" 
+          <select 
             name="employee_type" 
             value={formData.employee_type} 
-            onChange={handleInputChange} 
-            placeholder="Employee Type" 
-          />
+            onChange={handleInputChange}            
+          >
+          <option value="">Select Employee Type</option>
+          <option value="Full-time">Full-time</option>
+          <option value="Part-time">Part-time</option>          
+          </select>
         </div>
 
         <div>
           <label>Status</label>
-          <input 
-            type="text" 
-            name="status" 
-            value={formData.status} 
-            onChange={handleInputChange} 
-            placeholder="Status" 
-          />
+          <select
+          name="status"
+          value={formData.status}
+          onChange={handleInputChange}
+          >
+          <option value="">Select Status</option>
+          <option value="Active">Active</option>
+          <option value="Resigned">Resigned</option>
+          <option value="AWOL">AWOL</option>
+          </select>
         </div>
-
+        <br />
         <button type="submit">Submit</button>
       </form>
     </div>

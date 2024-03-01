@@ -119,12 +119,12 @@ const EmployeeList = () => {
       accessor: 'department_name',
     },
     {
-      Header: 'Status',
-      accessor: 'status',
-    },
-    {
       Header: 'Type',
       accessor: 'employee_type',
+    },
+    {
+      Header: 'Status',
+      accessor: 'status',
     },
     {
       Header: 'Actions',

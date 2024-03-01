@@ -15,12 +15,6 @@ const EditModal = ({ isOpen, onClose, onSave, rowData }) => {
         fetchDesignations();
       }, []);
 
-    const handleFieldChange = (field, value) => {
-        setEditedData(prevData => ({
-            ...prevData,
-            [field]: value
-        }));
-    };
     const fetchDesignations = async () => {
         try {
           const response = await axios.get('http://localhost:3000/employee-designations');
@@ -31,6 +25,13 @@ const EditModal = ({ isOpen, onClose, onSave, rowData }) => {
           setDesignations([]);
         }
       };
+
+    const handleFieldChange = (field, value) => {
+        setEditedData(prevData => ({
+            ...prevData,
+            [field]: value
+        }));
+    };
 
     const handleSave = (e) => {
         e.preventDefault();
@@ -142,19 +143,28 @@ const EditModal = ({ isOpen, onClose, onSave, rowData }) => {
                     </label>
                     <label>
                         Type:
-                        <input
-                            type="text"
-                            value={editedData?.employee_type || ''}
-                            onChange={(e) => handleFieldChange('employee_type', e.target.value)}
-                        />
+                        <select 
+                        name="employee_type" 
+                        value={editedData.employee_type}
+                        onChange={(e) => handleFieldChange('employee_type', e.target.value)}         
+                        >
+                    <option value="">Select Employee Type</option>
+                    <option value="Full-time">Full-time</option>
+                    <option value="Part-time">Part-time</option>          
+                    </select>
                     </label>
                     <label>
                         Status:
-                        <input
-                            type="text"
-                            value={editedData?.status || ''}
-                            onChange={(e) => handleFieldChange('status', e.target.value)}
-                        />
+                        <select
+                        name="status"
+                        value={editedData.status}
+                        onChange={(e) => handleFieldChange('status', e.target.value)}
+                        >
+                        <option value="">Select Status</option>
+                        <option value="Active">Active</option>
+                        <option value="Resigned">Resigned</option>
+                        <option value="AWOL">AWOL</option>
+                        </select>
                     </label>
 
                     <button type="submit">Save</button>
