@@ -36,6 +36,12 @@ const EditModal = ({ isOpen, onClose, onSave, rowData }) => {
 
     const handleSave = (e) => {       
         e.preventDefault();
+            // Find the selected designation from the designations array
+    const selectedDesignation = designations.find(d => d.designation_name === editedData.designation_name);
+    if (selectedDesignation) {
+        // If a matching designation is found, update the designation_id in the editedData
+        editedData.designation_id = selectedDesignation.id;
+    }
         onSave(editedData);
         onClose();
     };
