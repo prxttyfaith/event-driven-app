@@ -17,7 +17,7 @@ const EmployeeList = () => {
   useEffect(() => {
     const getEmployeeList = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/employee');
+        const response = await axios.get('http://localhost:3000/employees');
         setEmployees(response.data.data);
         setLoading(false);
       } catch (error) {
@@ -44,7 +44,7 @@ const EmployeeList = () => {
   const handleSave = async (editedData) => {
     try {
       // Make a PUT request to update employee data
-      await axios.put(`http://localhost:3000/employee/${editedData.id}`, editedData);
+      await axios.put(`http://localhost:3000/employees/${editedData.id}`, editedData);
 
       // Update the local state with the edited data
       const updatedEmployees = employees.map(emp =>
@@ -63,7 +63,7 @@ const EmployeeList = () => {
   const handleDelete = async (id) => {
     try {
       // Make a DELETE request to delete employee data
-      await axios.delete(`http://localhost:3000/employee/${id}`);
+      await axios.delete(`http://localhost:3000/employees/${id}`);
 
       // I see, we need to update the local state by filtering out the deleted employee
       setEmployees(prevEmployees => prevEmployees.filter(employee => employee.id !== id));

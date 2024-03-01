@@ -2,7 +2,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
-import './index.css';
 import AppRoutes from './routes/AppRoutes'; // Import AppRoutes
 import reportWebVitals from './reportWebVitals';
 

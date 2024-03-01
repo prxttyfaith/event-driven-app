@@ -1,5 +1,5 @@
 // ./src/pages/EmployeeManager.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../styles/EmployeeManager.css';
 import Sidebar from '../components/Sidebar';
@@ -21,6 +21,22 @@ function CreateEmployee() {
   });
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [designations, setDesignations] = useState('');
+
+  useEffect(() => {
+    fetchDesignations();
+  }, []);
+  
+  const fetchDesignations = async () => {
+    try {
+      const response = await axios.get('http://localhost:3000/employee-designations');
+      console.log('Designations:', response.data);
+      setDesignations(response.data.data);
+    } catch (error) {
+      console.error('Error fetching designations:', error);
+      setDesignations([]);
+    }
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -35,7 +51,11 @@ function CreateEmployee() {
 
     setLoading(true);
     try {
-      const response = await axios.post('http://localhost:3000/employee', formData);
+      const selectedDesignation = designations.find((designation) => designation.designation_name === formData.designation_name);
+      const designationId = selectedDesignation ? selectedDesignation.id : null;
+      const employeeData = { ...formData, designation_id: designationId };
+
+      const response = await axios.post('http://localhost:3000/employees', employeeData);
       console.log('Response:', response.data); // Optionally, handle response data
       setFormData({
         first_name: '',
@@ -47,7 +67,7 @@ function CreateEmployee() {
         state: '',
         country: '',
         zip_code: '',
-        designation_id: '',
+        designation_name: '',
         employee_type: '',
         status: ''
       }); // Reset form fields upon successful submission
@@ -171,13 +191,21 @@ function CreateEmployee() {
 
         <div>
           <label>Designation</label>
-          <input 
-            type="text" 
-            name="designation_id" 
-            value={formData.designation_id} 
+          <select 
+            name="designation_name" 
+            value={formData.designation_name} 
             onChange={handleInputChange} 
-            placeholder="Designation" 
-          />
+          >
+            <option value="">Select Designation</option>
+            {designations.length > 0 && (
+              designations.map ((designation) => (
+              <option key={designation.id} value={designation.designation_name}>
+                {designation.designation_name}
+              </option>
+            ))
+            )}
+          </select>
+
         </div>
         
         <div>

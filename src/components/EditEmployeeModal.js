@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 
 const EditModal = ({ isOpen, onClose, onSave, rowData }) => {
     const [editedData, setEditedData] = useState({});
+    const [designations, setDesignations] = useState('');
 
     useEffect(() => {
         // Populate editedData with rowData when the modal is opened
@@ -10,12 +11,26 @@ const EditModal = ({ isOpen, onClose, onSave, rowData }) => {
         setEditedData(rowData || {});
     }, [rowData]);
 
+    useEffect(() => {
+        fetchDesignations();
+      }, []);
+
     const handleFieldChange = (field, value) => {
         setEditedData(prevData => ({
             ...prevData,
             [field]: value
         }));
     };
+    const fetchDesignations = async () => {
+        try {
+          const response = await axios.get('http://localhost:3000/employee-designations');
+          console.log('Designations:', response.data);
+          setDesignations(response.data.data);
+        } catch (error) {
+          console.error('Error fetching designations:', error);
+          setDesignations([]);
+        }
+      };
 
     const handleSave = (e) => {
         e.preventDefault();
@@ -102,11 +117,20 @@ const EditModal = ({ isOpen, onClose, onSave, rowData }) => {
                     </label>
                     <label>
                         Designation:
-                        <input
-                            type="text"
-                            value={editedData?.designation_name || ''}
-                            onChange={(e) => handleFieldChange('designation_name', e.target.value)}
-                        />
+                        <select
+                            name="designation_name"
+                            value={editedData.designation_name}
+                            onChange={handleFieldChange}
+                        >
+                            <option value="">Select Designation</option>
+                            {designations.length > 0 && (
+                                designations.map((designation) => (
+                                    <option key={designation.id} value={designation.designation_name}>
+                                        {designation.designation_name}
+                                    </option>
+                                ))
+                            )}
+                        </select>
                     </label>
                     <label>
                         Department:
