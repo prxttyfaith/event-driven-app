@@ -1,29 +1,9 @@
-/* ./src/styles/Layout.css */
-
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-}
-
-header {
-    background-color: #2196F3;
-    color: #ffffff;
-    padding: 1em;
-    text-align: center;
-}
-
-h1 {
-    text-align: center;
-}
-
 .sidebar {
     width: 180px;
-    background-color: #34495e;
-    color: #ecf0f1;
+    background-color: #ffffff; 
+    color: #000000;
     padding: 20px;
-    height: 100vh;
+    height: 100%;
     position: fixed;
     top: 0;
     left: 0;
@@ -38,6 +18,7 @@ h1 {
 }
 
 .sidebar-header {
+    color: #355738;
     cursor: pointer;
     display: flex;
     justify-content: space-between;
@@ -56,16 +37,17 @@ h1 {
 }
 
 .sidebar-menu {
-    list-style: none;
+    list-style: none; /* Remove the bullets */
     padding: 0;
 }
 
 .sidebar-menu-item {
     margin-bottom: 10px;
+    list-style: none;
 }
 
 .sidebar-menu-item a {
-    color: #ecf0f1;
+    color: #355738; 
     text-decoration: none;
     transition: color 0.3s ease;
     position: relative;
@@ -74,7 +56,7 @@ h1 {
 }
 
 .sidebar-menu-item a:hover {
-    color: #f39c12;
+    color: #000000;
 }
 
 .sidebar-menu.collapsed {
@@ -82,53 +64,7 @@ h1 {
 }
 
 .sidebar-menu-item a::before {
-    content: '\2022';
+    content: ''; /* Remove the bullets */
     margin-right: 10px;
-    color: #ffffff;
+    color: #e6f1d639;
 }
-
-
-.hero-section {
-    /* background-image: url('../../src/assets/images/edp.png'); */
-    background-color: #333333;
-    background-size: cover;
-    background-position: center;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  }
-  
-  .hero-content {
-    color: #fff;
-  }
-  
-  .hero-content h1 {
-    font-size: 3rem;
-    margin-bottom: 20px;
-  }
-  
-  .hero-content p {
-    font-size: 1.5rem;
-    margin-bottom: 30px;
-  }
-  
-  .cta-buttons {
-    margin-top: 20px;
-  }
-  
-  .cta-button {
-    display: inline-block;
-    background-color: #007bff;
-    color: #fff;
-    padding: 10px 20px;
-    border-radius: 5px;
-    text-decoration: none;
-    margin-right: 10px;
-  }
-  
-  .cta-button:hover {
-    background-color: #0056b3;
-  }
-  

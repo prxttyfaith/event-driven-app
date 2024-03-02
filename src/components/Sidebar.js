@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/Sidebar.css';
 
-const Sidebar = () => {
+const Sidebar = () => { 
   const [collapsed, setCollapsed] = useState(false);
 
   const toggleSidebar = () => {
@@ -11,7 +11,6 @@ const Sidebar = () => {
   };
 
   return (
-    <div className={`home-container ${collapsed ? 'collapsed' : ''}`}>
       <div className="sidebar" style={{ width: collapsed ? '50px' : '180px' }}>
         <div className="sidebar-header" onClick={toggleSidebar}>
           <h2 className="sidebar-heading">
@@ -37,7 +36,6 @@ const Sidebar = () => {
           </div>
         </ul>
       </div>
-    </div>
   );
 };
 

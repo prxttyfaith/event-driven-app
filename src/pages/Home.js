@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';
+import '../styles/Home.css';
 
 const Home = () => {
   const [collapsed, setCollapsed] = useState(false);

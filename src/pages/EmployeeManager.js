@@ -1,7 +1,7 @@
 // ./src/pages/EmployeeManager.js
 import React, { useState } from 'react';
 import axios from 'axios';
-import '../styles/EmployeeManager.css';
+// import '../styles/EmployeeManager.css';
 import Sidebar from '../components/Sidebar';
 
 function EmployeeManager() {

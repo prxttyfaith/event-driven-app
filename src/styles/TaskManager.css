@@ -1,9 +1,27 @@
-/* Task Manager */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+
+header {
+  background-color: #0662b2;
+  color: rgb(255, 255, 255);
+  padding: 1em;
+  text-align: center;
+}
+
+h1 {
+  text-align: center;
+}
+
 .todo-container {
   max-width:650px;
   margin: 0 auto;
   padding: 20px;
 }
+
 
 .task-input {
   width: calc(95% - 80px);
@@ -67,7 +85,7 @@ li {
 }
 
 li:hover {
-  background-color: #438696;
+  background-color: #e0e0e0;
 }
 
 .edit-button {
@@ -102,5 +120,3 @@ li:hover {
   overflow-y: auto;
   max-height: 500px;
 }
-/* end of task manager */
-

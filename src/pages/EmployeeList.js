@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect, useMemo } from 'react';
 import axios from 'axios';
-import '../styles/EmployeeManager.css';
+import '../styles/EmployeeList.css';
 import Sidebar from '../components/Sidebar';
 import { useTable } from 'react-table';
 import EditModal from '../components/EditEmployeeModal';
