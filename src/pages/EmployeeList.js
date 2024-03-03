@@ -61,14 +61,17 @@ const EmployeeList = () => {
   };
 
   const handleDelete = async (id) => {
-    try {
-      // Make a DELETE request to delete employee data
-      await axios.delete(`http://localhost:3000/employees/${id}`);
-
-      // I see, we need to update the local state by filtering out the deleted employee
-      setEmployees(prevEmployees => prevEmployees.filter(employee => employee.id !== id));
-    } catch (error) {
-      console.error('Error deleting employee:', error);
+    const confirmDelete = window.confirm('Are you sure you want to delete this employee?');
+    if (confirmDelete) {
+      try {
+        // Make a DELETE request to delete employee data
+        await axios.delete(`http://localhost:3000/employees/${id}`);
+  
+        // Update the local state by filtering out the deleted employee
+        setEmployees(prevEmployees => prevEmployees.filter(employee => employee.id !== id));
+      } catch (error) {
+        console.error('Error deleting employee:', error);
+      }
     }
   };
 
@@ -131,8 +134,8 @@ const EmployeeList = () => {
       accessor: 'actions', // add a fake accessor for Actions column
       Cell: ({ row }) => (
         <>
-          <button onClick={() => handleEdit(row)}>Edit</button>
-          <button onClick={() => handleDelete(row.original.id)}>Delete</button>
+          <button className="edit-button" onClick={() => handleEdit(row)}>Edit</button>
+          <button  className="delete-button" onClick={() => handleDelete(row.original.id)}>Delete</button>
         </>
       ),
     },

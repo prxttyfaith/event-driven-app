@@ -15,7 +15,7 @@ const Page404 = () => {
   return (
     <div>
       <Sidebar />
-      <h1><center>EDP</center></h1>
+      {/* <h1><center>EDP</center></h1> */}
       <div className="page-404-container">
         <div className="error-message"><h2>Error 404: Page Not Found</h2></div>
         <button className="back-button" onClick={handleBack}>Back</button>

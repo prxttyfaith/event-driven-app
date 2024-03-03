@@ -90,6 +90,24 @@ function CreateEmployee() {
     }
   };
 
+  const resetForm = () => {
+    setFormData({
+      first_name: '',
+      middle_name: '',
+      last_name: '',
+      birthdate: '',
+      address_line: '',
+      city: '',
+      state: '',
+      country: '',
+      zip_code: '',
+      designation_name: '',
+      employee_type: '',
+      status: ''
+      // department_name: ''
+    });
+  };
+
   return (
     <div >
       <Sidebar />
@@ -259,6 +277,7 @@ function CreateEmployee() {
             </div>
             <br />
             <button type="submit">Submit</button>
+            <button type="button" className="cancel-button" onClick={resetForm}>Cancel</button>
           </form>
         </div>
       </div>

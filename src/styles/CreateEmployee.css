@@ -70,12 +70,35 @@
     color: #fff; 
     border: none; 
     cursor: pointer; 
+    margin-bottom: 5px;
   }
+
   button[type="submit"]:hover {
-      background-color: #0d3d12c5;
+      /* background-color: #0D3D12; */
       color: #E7EFE6;
       cursor: pointer;
+      font-size: medium;
   }
+
+  .cancel-button {
+    display: block;
+    width: 100%; 
+    padding: 10px ; 
+    background-color: transparent;
+    color: #0D3D12; 
+    border: 1px solid #0D3D12; 
+    cursor: pointer; 
+    margin-bottom: 5px;
+}
+
+.cancel-button:hover {
+    background-color: #bac2bb; 
+    color: #0D3D12; 
+    cursor: pointer;
+    
+}
+
+
   select{
     width: 100%; 
     padding: 8px; 

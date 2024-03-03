@@ -1,6 +1,6 @@
 .hero-section {
     /* background-image: url('../../src/assets/images/edp.png'); */
-    background-color: #333333;
+    background-color: #E7EFE6;
     background-size: cover;
     background-position: center;
     height: 100vh;
@@ -11,7 +11,7 @@
   }
   
   .hero-content {
-    color: #fff;
+    color: #355738;
   }
   
   .hero-content h1 {

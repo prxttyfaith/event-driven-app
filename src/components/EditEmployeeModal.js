@@ -190,7 +190,7 @@ const EditModal = ({ isOpen, onClose, onSave, rowData }) => {
                     </label>
 
                     <button type="submit">Save</button>
-                    <button onClick={onClose}>Cancel</button>
+                    <button id="cancel-button" onClick={onClose}>Cancel</button>
                 </form>
             </div>
         </div>
