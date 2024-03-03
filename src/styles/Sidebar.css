@@ -1,9 +1,9 @@
 .sidebar {
-    width: 180px;
     background-color: #ffffff; 
     color: #000000;
     padding: 20px;
     height: 100%;
+    width: 220px;
     position: fixed;
     top: 0;
     left: 0;
@@ -11,10 +11,7 @@
     overflow-y: auto;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     transition: width 0.5s ease;
-}
-
-.sidebar.collapsed {
-    width: 50px;
+    font-size: 16px; /* Set font size */
 }
 
 .sidebar-header {
@@ -23,48 +20,61 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 20px; /* Moved from sidebar-heading */
 }
 
-.sidebar-heading {
-    font-size: 24px;
-    margin-bottom: 20px;
+.sidebar-collapsed {
+    width: 30px; /* Collapsed width */
+}
+
+.sidebar-expanded {
+    width: 220px;
+}
+
+.sidebar-spaces {
+    margin-left: 25px;
+}
+
+.sidebar-icon {
+    float: left !important;
 }
 
 .toggle-icon {
     font-size: 24px;
-    transition: transform 0.3s ease;
-    cursor: pointer;
-}
-
-.sidebar-menu {
-    list-style: none; /* Remove the bullets */
-    padding: 0;
+    transition: transform 0.3s ease, font-size 0.3s ease;
 }
 
 .sidebar-menu-item {
-    margin-bottom: 10px;
-    list-style: none;
+    border-bottom: 1px solid #355738;
 }
 
 .sidebar-menu-item a {
     color: #355738; 
     text-decoration: none;
     transition: color 0.3s ease;
-    position: relative;
     display: flex;
     align-items: center;
+    font-size: 16px;
 }
 
 .sidebar-menu-item a:hover {
     color: #000000;
 }
 
-.sidebar-menu.collapsed {
-    display: none;
+.sidebar-submenu {
+    padding-left: 20px;
 }
 
-.sidebar-menu-item a::before {
-    content: ''; /* Remove the bullets */
-    margin-right: 10px;
-    color: #e6f1d639;
+.sidebar-menu-item .sidebar-submenu li {
+    display: block;
+    align-items: center;
+    /* background-color: #0274d80f; */
+    padding: 10px;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+/* New rule for aligning icons in collapsed mode */
+.sidebar-collapsed .sidebar-menu-item a {
+    justify-content: center;
 }

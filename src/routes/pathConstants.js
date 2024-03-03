@@ -4,7 +4,7 @@ const PathConstants = {
     HOME: "/",
     TASKMANAGER: "/task-manager",
     EMPLOYEEMANAGER: "/employee-manager",
-    CREATEEMPLOYEE: "/employee-manager/create-employee",
+    ADDEMPLOYEE: "/employee-manager/add-employee",
     EMPLOYEELIST: "/employee-manager/employee-list",
 };
 

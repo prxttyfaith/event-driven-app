@@ -15,8 +15,8 @@ const Home = () => {
       <Sidebar />
       <div className="hero-section">
         <div className="hero-content">
-          <h1>Welcome to EDP</h1>
-          <p>Empower our project using Event Driven Programming solutions. :)</p>
+          <h1>Welcome...</h1>
+          <p>Empowering our project using Event Driven Programming solutions. :)</p>
           <div className="cta-buttons">
             <Link to="/task-manager" className="cta-button">Task Manager</Link>
             <Link to="/employee-manager" className="cta-button">Employee Manager</Link>

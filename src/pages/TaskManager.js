@@ -54,7 +54,7 @@ const TaskManager = () => {
 
   function onClick(id) {
     const taskExists = tasks.some(task => task.id === id);
-  
+
     if (taskExists) {
       handleDeleteTask(id);
     } else {
@@ -67,10 +67,10 @@ const TaskManager = () => {
     try {
       // Make a DELETE request to the API endpoint
       await axios.delete(`http://localhost:3000/to-do-list/${idToDelete}`);
-      
+
       // Remove the deleted task from the tasks state
       setTasks(tasks.filter(task => task.id !== idToDelete));
-      
+
       console.log(`Task with id ${idToDelete} deleted successfully.`);
     } catch (error) {
       console.error('Error deleting task:', error);
@@ -105,35 +105,35 @@ const TaskManager = () => {
 
   return (
     <div>
-      <Sidebar />
-      <center>
-          {/* <h1>EDP</h1> */}
+      <Sidebar/>
+      <div className="task-manager-container">
           <h2>Task Manager</h2>
-      </center>
-      <div className="todo-container">
-        <div>
-          <input
-            type="text"
-            className="task-input"
-            placeholder="Enter new task..."
-            value={taskInput}
-            onChange={handleInputChange}
-          />
-          <button className="add-button" onClick={handleAddTask}>
-            Add Task
-          </button>
+
+        <div className="todo-container">
+          <div>
+            <input
+              type="text"
+              className="task-input"
+              placeholder="Enter new task..."
+              value={taskInput}
+              onChange={handleInputChange}
+            />
+            <button className="add-button" onClick={handleAddTask}>
+              Add Task
+            </button>
+          </div>
+          <ul id="list">
+            {tasks.map(task => (
+              <li id="item" key={task.id}>
+                {task.name}
+                <div className="tasks-lists-container">
+                  <button className="edit-button" onClick={() => handleEditTask(task.id)}>Edit</button>
+                  <button className="delete-button" onClick={() => handleDeleteTask(task.id)}>Delete</button>
+                </div>
+              </li>
+            ))}
+          </ul>
         </div>
-        <ul id="list">
-          {tasks.map(task => (
-            <li key={task.id}>
-              {task.name}
-              <div className="tasks-lists-container">
-                <button className="edit-button" onClick={() => handleEditTask(task.id)}>Edit</button>
-                <button className="delete-button" onClick={() => handleDeleteTask(task.id)}>Delete</button>
-              </div>
-            </li>
-          ))}
-        </ul>
       </div>
     </div>
   );

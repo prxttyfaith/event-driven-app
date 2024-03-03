@@ -4,7 +4,7 @@ import PathConstants from './PathConstants';
 import Home from '../pages/Home';
 import TaskManager from '../pages/TaskManager';
 import EmployeeManager from '../pages/EmployeeManager';
-import CreateEmployee from '../pages/CreateEmployee';
+import AddEmployee from '../pages/AddEmployee';
 import EmployeeList from '../pages/EmployeeList';
 import Page404 from '../pages/Page404';
 
@@ -14,7 +14,7 @@ const AppRoutes = () => { // Rename Routes to AppRoutes
       <Route path={PathConstants.HOME} element={<Home />} />
       <Route path={PathConstants.TASKMANAGER} element={<TaskManager />} />
       <Route path={PathConstants.EMPLOYEEMANAGER} element={<EmployeeManager />} />
-      <Route path={PathConstants.CREATEEMPLOYEE} element={<CreateEmployee />} />
+      <Route path={PathConstants.ADDEMPLOYEE} element={<AddEmployee />} />
       <Route path={PathConstants.EMPLOYEELIST} element={<EmployeeList />} />
       <Route path="*" element={<Page404 />} />
     </Routes>

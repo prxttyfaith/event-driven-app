@@ -1,7 +1,7 @@
-// ./src/pages/EmployeeManager.js
+// ./src/pages/AddEmployee.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import '../styles/CreateEmployee.css';
+import '../styles/AddEmployee.css';
 import Sidebar from '../components/Sidebar';
 
 function CreateEmployee() {

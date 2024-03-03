@@ -1,0 +1,119 @@
+/* for src/pages/AddEmployee.js*/
+.create-employee-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  background-color: #E7EFE6;
+  background-size: cover;
+  padding: 0rem 2rem 2rem 5rem; 
+  /* background-position: center; */
+  }
+
+.create-employee-container {
+  background-color: #e7efe6;
+  background-size: cover;
+  background-position: center;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0rem 2rem 2rem 5rem; 
+}
+
+.create-employee-container h2 {
+  text-align: center;
+  font-size: 40px;
+  color: #355738;
+}
+
+form {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.form-group {
+  width: 100%;
+  display: flex;
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  width: 20%;
+  padding: 10px;
+  text-align: left;
+  font-size: 16px;
+}
+
+.form-group input, 
+.form-group select {
+  width: 35vw;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #000;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+/* Styling for arrow on Select */
+.form-group select {
+  -webkit-appearance: none; /* Remove default arrow in Safari */
+  -moz-appearance: none; /* Remove default arrow in Firefox */
+  appearance: none; /* Remove default arrow */
+  background-image: url('data:image/svg+xml;utf8,<svg fill="%23424242" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>'); /* Custom arrow */
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 20px; /* Adjust size of the arrow */
+  padding-right: 30px; /* Ensure space for arrow */
+}
+
+button[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  background-color: #0d3d12;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 1rem;
+  margin-bottom: 5px;
+}
+
+button[type="submit"]:hover {
+  font-size: medium;
+}
+
+.cancel-button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: transparent;
+  color: #0D3D12;
+  border: 1px solid #0D3D12;
+  cursor: pointer;
+  margin-bottom: 5px;
+  border-radius: 5px;
+}
+
+.cancel-button:hover {
+  background-color: #bac2bb;
+  color: #0D3D12;
+  cursor: pointer;
+  font-size: medium;
+
+}
+
+/* span {
+  color: #000000;
+  margin-top: 10px;
+} */
+
+/* Style for error messages */
+/* .error {
+  color: red;
+  margin-top: 5px;
+} */
+
+/* END of CreateEmployee */

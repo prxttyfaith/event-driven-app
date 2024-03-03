@@ -4,7 +4,7 @@ import axios from 'axios';
 import '../styles/EmployeeList.css';
 import Sidebar from '../components/Sidebar';
 import { useTable } from 'react-table';
-import EditModal from '../components/EditEmployeeModal';
+import EmployeeModal from '../components/EmployeeModal';
 
 const EmployeeList = () => {
   const [loading, setLoading] = useState(true);
@@ -66,7 +66,7 @@ const EmployeeList = () => {
       try {
         // Make a DELETE request to delete employee data
         await axios.delete(`http://localhost:3000/employees/${id}`);
-  
+
         // Update the local state by filtering out the deleted employee
         setEmployees(prevEmployees => prevEmployees.filter(employee => employee.id !== id));
       } catch (error) {
@@ -139,7 +139,7 @@ const EmployeeList = () => {
       Cell: ({ row }) => (
         <>
           <button className="edit-button" onClick={() => handleEdit(row)}>Edit</button>
-          <button  className="delete-button" onClick={() => handleDelete(row.original.id)}>Delete</button>
+          <button className="delete-button" onClick={() => handleDelete(row.original.id)}>Delete</button>
         </>
       ),
     },
@@ -157,53 +157,55 @@ const EmployeeList = () => {
   });
 
   return (
-    <div className="employee-list-container">
+    <div >
       <Sidebar />
-      <h2> Employee List</h2>
-      <div className="employee-list">
-        {/* <h2> Employee List</h2> */}
-        {loading ? (
-          <div>Loading...</div>
-        ) : (
-          <>
-            <table className="employee-list" {...getTableProps()}>
-              <thead>
-                {headerGroups.map(headerGroup => (
-                  <tr {...headerGroup.getHeaderGroupProps()}>
-                    {headerGroup.headers.map(column => (
-                      <th {...column.getHeaderProps()}>{column.render('Header')}</th>
-                    ))}
-                  </tr>
-                ))}
-              </thead>
-              <tbody {...getTableBodyProps()}>
-                {rows.map(row => {
-                  prepareRow(row);
-                  return (
-                    <tr {...row.getRowProps()}>
-                      {row.cells.map(cell => (
-                        <td {...cell.getCellProps()}>
-                          {cell.column.id !== 'actions' ? (
-                            <span>{row.values[cell.column.id]}</span>
-                          ) : (
-                            <>{cell.render('Cell')}</>
-                          )}
-                        </td>
+      <div className="employee-list-container">
+        <h2> Employee List</h2>
+        <div className="employee-list">
+          {/* <h2> Employee List</h2> */}
+          {loading ? (
+            <div>Loading...</div>
+          ) : (
+            <>
+              <table className="employee-list" {...getTableProps()}>
+                <thead>
+                  {headerGroups.map(headerGroup => (
+                    <tr {...headerGroup.getHeaderGroupProps()}>
+                      {headerGroup.headers.map(column => (
+                        <th {...column.getHeaderProps()}>{column.render('Header')}</th>
                       ))}
                     </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-            <EditModal
-              isOpen={isEditModalOpen}
-              onClose={() => setIsEditModalOpen(false)}
-              onSave={handleSave}
-              rowData={rowDataForEdit}
-              editableFields={editableFields}
-            />
-          </>
-        )}
+                  ))}
+                </thead>
+                <tbody {...getTableBodyProps()}>
+                  {rows.map(row => {
+                    prepareRow(row);
+                    return (
+                      <tr {...row.getRowProps()}>
+                        {row.cells.map(cell => (
+                          <td {...cell.getCellProps()}>
+                            {cell.column.id !== 'actions' ? (
+                              <span>{row.values[cell.column.id]}</span>
+                            ) : (
+                              <>{cell.render('Cell')}</>
+                            )}
+                          </td>
+                        ))}
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+              <EmployeeModal
+                isOpen={isEditModalOpen}
+                onClose={() => setIsEditModalOpen(false)}
+                onSave={handleSave}
+                rowData={rowDataForEdit}
+                editableFields={editableFields}
+              />
+            </>
+          )}
+        </div>
       </div>
     </div>
   );

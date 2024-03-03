@@ -161,6 +161,7 @@ const EditModal = ({ isOpen, onClose, onSave, rowData }) => {
                             type="text"
                             value={editedData?.department_name || ''}
                             onChange={(e) => handleFieldChange('department_name', e.target.value)}
+                            disabled
                         />
                     </label>
                     <label>
