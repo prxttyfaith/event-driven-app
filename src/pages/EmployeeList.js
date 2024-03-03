@@ -152,8 +152,9 @@ const EmployeeList = () => {
   return (
     <div className="employee-list-container">
       <Sidebar />
+      <h2> Employee List</h2>
       <div className="employee-list">
-        <h2>Employee List</h2>
+        {/* <h2> Employee List</h2> */}
         {loading ? (
           <div>Loading...</div>
         ) : (

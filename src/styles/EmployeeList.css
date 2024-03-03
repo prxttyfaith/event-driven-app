@@ -1,25 +1,31 @@
 /* for src/Pages/EmployeeList.js */
 .employee-list-container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100%;
+    background-color: #E7EFE6;
+    background-size: cover;
+    padding: 2rem 2rem 2rem 5rem; 
+    /* background-position: center; */
     }
     
     .employee-list {
     max-width: 1200px;
     margin: 20px;
-    padding: 20px;
+    padding: 20px 30px 20px 20px;
     border: 1px solid #ccc;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     background-color: #fff;
     }
     
-    .employee-list h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-    }
+    .employee-list-container h2 {
+        text-align: center;
+        font-size: 40px;
+        color: #355738;
+      }
     
     .employee-list table {
     width: 100%;
@@ -33,9 +39,13 @@
     }
     
     .employee-list th {
-    background-color: #f0f0f0;
+    background-color: #E7EFE6;
     font-weight: bold;
     text-align: left;
+    color: #355738;
+    position: sticky;
+    top: 0;
+    z-index: 1; 
     }
     
     .employee-list td {
@@ -103,13 +113,13 @@
     padding: 12px;
     border: none;
     border-radius: 4px;
-    background-color: #007bff;
+    background-color: #355738;
     color: white;
     cursor: pointer;
     margin-bottom: 5px;
     }
     
     .modal-content button:hover {
-    background-color: #0056b3;
+    background-color: #355738c5;
     }
     /* END for src/Pages/EmployeeList.js */

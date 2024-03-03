@@ -91,12 +91,10 @@ function CreateEmployee() {
   };
 
   return (
-    <div>
+    <div >
       <Sidebar />
       <div className="create-employee-container">
-        <div className="heading">
           <h2>Employee Form</h2>
-        </div>
         {loading && <div>Loading...</div>}
         {errorMessage && <div className="error">{errorMessage}</div>}
         <br />

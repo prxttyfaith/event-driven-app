@@ -13,9 +13,9 @@ const Sidebar = () => {
   return (
       <div className="sidebar" style={{ width: collapsed ? '50px' : '180px' }}>
         <div className="sidebar-header" onClick={toggleSidebar}>
-          <h2 className="sidebar-heading">
+          <h1 className="sidebar-heading">
             EDP
-          </h2>
+          </h1>
           <span className="toggle-icon">{collapsed ? '☰' : '←'}</span>
         </div>
         <ul className={`sidebar-menu ${collapsed ? 'collapsed' : ''}`}>
