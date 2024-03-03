@@ -77,6 +77,10 @@ const EmployeeList = () => {
 
   const columns = useMemo(() => [
     {
+      Header: 'ID',
+      accessor: 'id',
+    },
+    {
       Header: 'First Name',
       accessor: 'first_name',
     },
@@ -93,7 +97,7 @@ const EmployeeList = () => {
       accessor: 'birthdate',
     },
     {
-      Header: 'Address',
+      Header: 'Address Line',
       accessor: 'address_line',
       // Cell: ({ value }) => <span>{value || '-'}</span>, // Handle empty address
     },
@@ -102,7 +106,7 @@ const EmployeeList = () => {
       accessor: 'city',
     },
     {
-      Header: 'State',
+      Header: 'Province',
       accessor: 'state',
     },
     {
@@ -162,7 +166,7 @@ const EmployeeList = () => {
           <div>Loading...</div>
         ) : (
           <>
-            <table {...getTableProps()}>
+            <table className="employee-list" {...getTableProps()}>
               <thead>
                 {headerGroups.map(headerGroup => (
                   <tr {...headerGroup.getHeaderGroupProps()}>

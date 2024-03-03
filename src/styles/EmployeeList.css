@@ -7,18 +7,26 @@
     height: 100%;
     background-color: #E7EFE6;
     background-size: cover;
-    padding: 2rem 2rem 2rem 5rem; 
+    padding: 0rem 2rem 2rem 5rem; 
     /* background-position: center; */
     }
     
     .employee-list {
     max-width: 1200px;
-    margin: 20px;
+    margin: 5px;
     padding: 20px 30px 20px 20px;
     border: 1px solid #ccc;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     background-color: #fff;
+    font-size: 13px;
+    /* overflow-x: auto; */
+    
+    }
+
+    .employee-list table {
+        width: 100%;
+        border-collapse: collapse;
     }
     
     .employee-list-container h2 {
@@ -26,26 +34,25 @@
         font-size: 40px;
         color: #355738;
       }
-    
-    .employee-list table {
-    width: 100%;
-    border-collapse: collapse;
-    }
+
     
     .employee-list th,
     .employee-list td {
-    padding: 8px 12px;
     border: 1px solid #ccc;
+    padding: 10px 10px 10px 10px;
+    text-align: left;
     }
     
     .employee-list th {
     background-color: #E7EFE6;
+    font-size: 14px;
     font-weight: bold;
     text-align: left;
     color: #355738;
     position: sticky;
     top: 0;
     z-index: 1; 
+    padding: 10px 10px 10px 10px
     }
     
     .employee-list td {
@@ -120,14 +127,13 @@
     padding: 12px;
     border: none;
     border-radius: 4px;
-    background-color: #0D3D12;
+    background-color: #355738;
     color: white;
     cursor: pointer;
     margin-bottom: 5px;
     }
     
     .modal-content button:hover {
-    /* background-color: #355738c5; */
     font-size: medium;
     }
 
@@ -144,5 +150,6 @@
     background-color: #bac2bb; /* Remove the background color */
     color: #0D3D12; /* Change the text color to black */
     cursor: pointer;
+    font-size: medium;
 }
     /* END for src/Pages/EmployeeList.js */

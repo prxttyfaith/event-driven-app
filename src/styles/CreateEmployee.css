@@ -1,119 +1,120 @@
 /* for src/pages/CreateEmployee.js*/
 
 .create-employee-container {
-    padding: 2rem 2rem 5rem 2rem;
-    background-color: #E7EFE6;
-    background-size: cover;
-    background-position: center;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    /* justify-content: center; */
-    /* align-items: center; */
-    /* text-align: center; */
-  }
-  
-  .create-employee-container h2 {
-    text-align: center;
-    font-size: 40px;
-    color: #355738;
-  }
-  .form-group{
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-  }
-  .des-dep{
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 10px;
-  }
-  
-  .form-group label, 
-  .des-dep label{
-    width: 120px;
-    text-align: left;
-    margin-right: 15px;
-    font-size: 16px;
-  }
-  
-  .form-group input,
-  .form-group select,
-  .des-dep select {
-    flex: 1;
-    border-radius: 10px;
-    font-size: 14px;
-  }
-  
-  form {
-    width: 500px; 
-    margin: 0 auto; 
-  }
-  
-  /* Style for form labels */
-  label {
-    display: block; 
-    margin-bottom: 5px; 
-  }
-  /* Style for input fields */
-  input, .des-dept select{
-    width: 100%; 
-    padding: 8px; 
-    margin-bottom: 10px; 
-    box-sizing: border-box; 
-  }
-  /* Style for the submit button */
-  button[type="submit"] {
-    width: 100%; 
-    padding: 10px; 
-    background-color: #0D3D12; 
-    color: #fff; 
-    border: none; 
-    cursor: pointer; 
-    margin-bottom: 5px;
-  }
+  /* padding: 2rem 2rem 5rem 2rem; */
+  padding: 0rem 2rem 2rem 5rem; 
+  background-color: #E7EFE6;
+  background-size: cover;
+  background-position: center;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  /* align-items: center; */
+  /* text-align: center; */
+}
 
-  button[type="submit"]:hover {
-      /* background-color: #0D3D12; */
-      color: #E7EFE6;
-      cursor: pointer;
-      font-size: medium;
-  }
+.create-employee-container h2 {
+  text-align: center;
+  font-size: 40px;
+  color: #355738;
+}
 
-  .cancel-button {
-    display: block;
-    width: 100%; 
-    padding: 10px ; 
-    background-color: transparent;
-    color: #0D3D12; 
-    border: 1px solid #0D3D12; 
-    cursor: pointer; 
-    margin-bottom: 5px;
+.form-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+
+.form-group label {
+  width: 120px;
+  text-align: left;
+  margin-right: 15px;
+  font-size: 16px;
+}
+
+.form-group input,
+.form-group select {
+  flex: 1;
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+form {
+  width: 500px;
+  margin: 0 auto;
+}
+
+/* Style for form labels */
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+/* Style for input fields */
+input,
+.des-dept select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+
+/* Style for the submit button */
+button[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  background-color: #0D3D12;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 5px;
+}
+
+button[type="submit"]:hover {
+  /* background-color: #0D3D12; */
+  color: #E7EFE6;
+  cursor: pointer;
+  font-size: medium;
+}
+
+.cancel-button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: transparent;
+  color: #0D3D12;
+  border: 1px solid #0D3D12;
+  cursor: pointer;
+  margin-bottom: 5px;
 }
 
 .cancel-button:hover {
-    background-color: #bac2bb; 
-    color: #0D3D12; 
-    cursor: pointer;
-    
+  background-color: #bac2bb;
+  color: #0D3D12;
+  cursor: pointer;
+  font-size: medium;
+
 }
 
 
-  select{
-    width: 100%; 
-    padding: 8px; 
-    margin-bottom: 10px; 
-    box-sizing: border-box; 
-  }
-  span{
-    color: #000000; 
-    margin-top: 10px; 
-  }
-  
-  /* Style for error messages */
-  .error {
-    color: red; 
-    margin-top: 5px; 
-  }
-  /* END of CreateEmployee */
-  
+select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+
+span {
+  color: #000000;
+  margin-top: 10px;
+}
+
+/* Style for error messages */
+.error {
+  color: red;
+  margin-top: 5px;
+}
+
+/* END of CreateEmployee */

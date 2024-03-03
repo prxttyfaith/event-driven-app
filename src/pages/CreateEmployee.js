@@ -82,6 +82,7 @@ function CreateEmployee() {
         status: ''
       }); // Reset form fields upon successful submission
       setErrorMessage('');
+      alert('Employee added successfully');
     } catch (error) {
       console.error('Error submitting employee:', error);
       setErrorMessage('Error submitting employee. Please try again.');
@@ -112,7 +113,7 @@ function CreateEmployee() {
     <div >
       <Sidebar />
       <div className="create-employee-container">
-          <h2>Employee Form</h2>
+        <h2>Employee Form</h2>
         {loading && <div>Loading...</div>}
         {errorMessage && <div className="error">{errorMessage}</div>}
         <br />
@@ -217,37 +218,36 @@ function CreateEmployee() {
               />
             </div>
 
-
-              <div className="des-dep">
-                <label>Designation</label>
-                <select
-                  name="designation_name"
-                  value={formData.designation_name}
-                  onChange={handleInputChange}
-                >
-                  <option value="">Select Designation</option>
-                  {designations.length > 0 && (
-                    designations.map((designation) => (
-                      <option key={designation.id} value={designation.designation_name}>
-                        {designation.designation_name}
-                      </option>
-                    ))
-                  )}
-                </select>
-
-                {formData.department_name && (
-                  <div className="form-group">
-                    <label htmlFor="department_name">Department:</label>
-                    <input
-                      // type="text" 
-                      name="department_name"
-                      value={formData.department_name}
-                      onChange={e => handleInputChange('department_name', e.target.value)}
-                      disabled
-                    />
-                  </div>
+            <div className="form-group">
+              <label>Designation</label>
+              <select
+                name="designation_name"
+                value={formData.designation_name}
+                onChange={handleInputChange}
+              >
+                <option value="">Select Designation</option>
+                {designations.length > 0 && (
+                  designations.map((designation) => (
+                    <option key={designation.id} value={designation.designation_name}>
+                      {designation.designation_name}
+                    </option>
+                  ))
                 )}
-              </div>
+              </select>
+            </div>
+
+              {formData.department_name && (
+                <div className="form-group">
+                  <label htmlFor="department_name">Department:</label>
+                  <input
+                    // type="text" 
+                    name="department_name"
+                    value={formData.department_name}
+                    onChange={e => handleInputChange('department_name', e.target.value)}
+                    disabled
+                  />
+                </div>
+              )}
 
             <div className="form-group">
               <label>Employee Type</label>
