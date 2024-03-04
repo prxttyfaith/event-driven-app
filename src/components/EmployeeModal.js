@@ -98,7 +98,7 @@ const EditModal = ({ isOpen, onClose, onSave, rowData }) => {
                         />
                     </label>
                     <label>
-                        Address:
+                        Address Line:
                         <input
                             type="text"
                             value={editedData?.address_line || ''}
@@ -114,7 +114,7 @@ const EditModal = ({ isOpen, onClose, onSave, rowData }) => {
                         />
                     </label>
                     <label>
-                        State:
+                        Province:
                         <input
                             type="text"
                             value={editedData?.state || ''}

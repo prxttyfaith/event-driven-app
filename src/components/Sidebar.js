@@ -37,7 +37,7 @@ const Sidebar = () => {
     <div className={`sidebar ${collapsed ? 'sidebar-collapsed' : 'sidebar-expanded'}`}>
       
       <div className="sidebar-header" onClick={toggleSidebar}>
-        {!collapsed && <h2>EDP</h2>}
+        {!collapsed && <h2>UNICODE</h2>}
         <span className="toggle-icon">
           {collapsed ?  <KeyboardArrowRightIcon fontSize="large" /> : <KeyboardArrowLeftIcon fontSize="large" />}
         </span>

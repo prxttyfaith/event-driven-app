@@ -186,13 +186,13 @@ function CreateEmployee() {
             </div>
 
             <div className="form-group">
-              <label>State</label>
+              <label>Province</label>
               <input
                 type="text"
                 name="state"
                 value={formData.state}
                 onChange={handleInputChange}
-                placeholder="State"
+                placeholder="Province"
               />
             </div>
 

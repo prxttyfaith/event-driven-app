@@ -52,7 +52,7 @@ form {
   width: 35vw;
   padding: 10px;
   font-size: 14px;
-  border: 1px solid #000;
+  border: 1px solid #0d3d12;
   border-radius: 5px;
   box-sizing: border-box;
 }
@@ -77,7 +77,7 @@ button[type="submit"] {
   border: none;
   cursor: pointer;
   border-radius: 5px;
-  margin-top: 1rem;
+  /* margin-top: 1rem; */
   margin-bottom: 5px;
 }
 

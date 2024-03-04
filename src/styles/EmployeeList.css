@@ -14,7 +14,7 @@
   .employee-list {
   max-width: 1200px;
   margin: 5px;
-  padding: 20px 30px 20px 20px;
+  padding: 20px 50px 20px 18px;
   border: 1px solid #ccc;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -70,7 +70,9 @@
 
 .edit-button,
 .delete-button {
-  margin-bottom: 5px;
+  margin: 2px 5px 5px 5px;
+  /* margin-right: 5px;
+  margin-bottom: 5px; */
   }
 
 
