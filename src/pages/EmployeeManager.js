@@ -1,8 +1,8 @@
 // ./src/pages/EmployeeManager.js
 import React, { useState } from 'react';
 import axios from 'axios';
-// import '../styles/EmployeeManager.css';
 import Sidebar from '../components/Sidebar';
+import config from '../config';
 
 function EmployeeManager() {
   const [formData, setFormData] = useState({
@@ -32,7 +32,7 @@ function EmployeeManager() {
 
     setLoading(true);
     try {
-      const response = await axios.post('http://localhost:3000/employee', formData);
+      const response = await axios.post(`${config.apiUrl}/employee`, formData);
       console.log('Response:', response.data); // Optionally, handle response data
       setFormData({
         first_name: '',

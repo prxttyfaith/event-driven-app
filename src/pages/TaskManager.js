@@ -4,6 +4,7 @@ import '../styles/TaskManager.css';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Sidebar from '../components/Sidebar';
+import config from '../config';
 
 const TaskManager = () => {
   const [tasks, setTasks] = useState([]);
@@ -15,7 +16,7 @@ const TaskManager = () => {
   }, []);
 
   const fetchTasks = () => {
-    axios.get('http://localhost:3000/to-do-list')
+    axios.get(`${config.apiUrl}/to-do-list`)
       .then(response => {
         console.log('API Response:', response);
         setTasks(response.data.data);
@@ -32,7 +33,7 @@ const TaskManager = () => {
   // Add task to the list
   const handleAddTask = () => {
     if (!taskInput.trim()) return;
-    fetch('http://localhost:3000/to-do-list', {
+    fetch(`${config.apiUrl}/to-do-list`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -66,7 +67,7 @@ const TaskManager = () => {
   const handleDeleteTask = async (idToDelete) => {
     try {
       // Make a DELETE request to the API endpoint
-      await axios.delete(`http://localhost:3000/to-do-list/${idToDelete}`);
+      await axios.delete(`${config.apiUrl}/to-do-list/${idToDelete}`);
 
       // Remove the deleted task from the tasks state
       setTasks(tasks.filter(task => task.id !== idToDelete));
@@ -92,7 +93,7 @@ const TaskManager = () => {
       }
 
       // Make a PUT request to the API endpoint
-      await axios.put(`http://localhost:3000/to-do-list/${idToEdit}`, { name: newTaskName });
+      await axios.put(`${config.apiUrl}/to-do-list/${idToEdit}`, { name: newTaskName });
 
       // Update the task in the tasks state
       setTasks(tasks.map(task => task.id === idToEdit ? { ...task, name: newTaskName } : task));

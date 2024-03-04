@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../styles/AddEmployee.css';
 import Sidebar from '../components/Sidebar';
+import config from '../config';
 
 function CreateEmployee() {
   const [formData, setFormData] = useState({
@@ -30,7 +31,7 @@ function CreateEmployee() {
 
   const fetchDesignations = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/employee-designations');
+      const response = await axios.get(`${config.apiUrl}/employee-designations`);
       console.log('Designations:', response.data);
       setDesignations(response.data.data);
     } catch (error) {
@@ -65,7 +66,7 @@ function CreateEmployee() {
       const designationId = selectedDesignation ? selectedDesignation.id : null;
       const employeeData = { ...formData, designation_id: designationId };
 
-      const response = await axios.post('http://localhost:3000/employees', employeeData);
+      const response = await axios.post(`${config.apiUrl}/employees`, employeeData);
       console.log('Response:', response.data); // Optionally, handle response data
       setFormData({
         first_name: '',

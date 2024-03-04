@@ -19,7 +19,7 @@ const Home = () => {
           <p></p>
           <div className="cta-buttons">
             <Link to="/task-manager" className="cta-button">Task Manager</Link>
-            <Link to="/employee-manager" className="cta-button">Employee Manager</Link>
+            <Link to="/employee-manager/employee-list" className="cta-button">Employee Manager</Link>
           </div>
         </div>
       </div>

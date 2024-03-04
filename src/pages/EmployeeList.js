@@ -5,6 +5,7 @@ import '../styles/EmployeeList.css';
 import Sidebar from '../components/Sidebar';
 import { useTable } from 'react-table';
 import EmployeeModal from '../components/EmployeeModal';
+import config from '../config';
 
 const EmployeeList = () => {
   const [loading, setLoading] = useState(true);
@@ -17,7 +18,7 @@ const EmployeeList = () => {
   useEffect(() => {
     const getEmployeeList = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/employees');
+        const response = await axios.get(`${config.apiUrl}/employees`);
         setEmployees(response.data.data);
         setLoading(false);
       } catch (error) {
@@ -44,7 +45,7 @@ const EmployeeList = () => {
   const handleSave = async (editedData) => {
     try {
       // Make a PUT request to update employee data
-      await axios.put(`http://localhost:3000/employees/${editedData.id}`, editedData);
+      await axios.put(`${config.apiUrl}/employees/${editedData.id}`, editedData);
 
       // Update the local state with the edited data
       const updatedEmployees = employees.map(emp =>
@@ -65,7 +66,7 @@ const EmployeeList = () => {
     if (confirmDelete) {
       try {
         // Make a DELETE request to delete employee data
-        await axios.delete(`http://localhost:3000/employees/${id}`);
+        await axios.delete(`${config.apiUrl}/employees/${id}`);
 
         // Update the local state by filtering out the deleted employee
         setEmployees(prevEmployees => prevEmployees.filter(employee => employee.id !== id));
