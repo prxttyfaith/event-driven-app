@@ -1,0 +1,80 @@
+.sidebar {
+    background-color: #ffffff; 
+    color: #000000;
+    padding: 20px;
+    height: 100%;
+    width: 220px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    overflow-y: auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: width 0.5s ease;
+    font-size: 16px; /* Set font size */
+}
+
+.sidebar-header {
+    color: #355738;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px; /* Moved from sidebar-heading */
+}
+
+.sidebar-collapsed {
+    width: 30px; /* Collapsed width */
+}
+
+.sidebar-expanded {
+    width: 220px;
+}
+
+.sidebar-spaces {
+    margin-left: 25px;
+}
+
+.sidebar-icon {
+    float: left !important;
+}
+
+.toggle-icon {
+    font-size: 24px;
+    transition: transform 0.3s ease, font-size 0.3s ease;
+}
+
+.sidebar-menu-item {
+    border-bottom: 1px solid #355738;
+}
+
+.sidebar-menu-item a {
+    color: #355738; 
+    text-decoration: none;
+    transition: color 0.3s ease;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+}
+
+.sidebar-menu-item a:hover {
+    color: #000000;
+}
+
+.sidebar-submenu {
+    padding-left: 20px;
+}
+
+.sidebar-menu-item .sidebar-submenu li {
+    display: block;
+    align-items: center;
+    /* background-color: #0274d80f; */
+    padding: 10px;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+/* New rule for aligning icons in collapsed mode */
+.sidebar-collapsed .sidebar-menu-item a {
+    justify-content: center;
+}
