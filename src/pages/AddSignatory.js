@@ -5,16 +5,15 @@ import Sidebar from '../components/Sidebar';
 import config from '../config';
 
 function AddSignatory() {
-
     const [formData, setFormData] = useState({
-
         employee_name: '',
+        // signatory_name: '',
         signatory_status: ''
     });
     const [loading, setLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
-    const [employees, setEmployees] = useState('');
-    const [signatories, setSignatories] = useState('');
+    const [employees, setEmployees] = useState([]);
+    const [signatories, setSignatories] = useState([]);
 
     useEffect(() => {
         fetchEmployeeSignatory();
@@ -25,29 +24,31 @@ function AddSignatory() {
             const response = await axios.get(`${config.apiUrl}/employee-signatories/signatory`);
             console.log('Employee Signatory:', response.data);
             setEmployees(response.data.data);
+            setSignatories(response.data.data);
         } catch (error) {
             console.error('Error fetching signatory:', error);
             setEmployees([]);
+            setSignatories([]);
         }
     };
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
+
         if (name === 'employee_name') {
             const selectedEmployee = employees.find((employee) => employee.employee_name === value);
-            // const selectedSignatory = signatories.find((signatory) => signatory.signatory_name === value);
             setFormData({
                 ...formData,
+                employee_id: selectedEmployee ? selectedEmployee.id : '',
                 [name]: value
-                // department_name: selectedDesignation ? selectedDesignation.department_name : ''
-
             });
-        // } else if (name === 'signatory_name') {
-        //     const selectedSignatory = signatories.find((signatory) => signatory.signatory_name === value);
-        //     setFormData({
-        //         ...formData,
-        //         [name]: value
-        //     });
+        } else if (name === 'signatory_name') {
+            const selectedSignatory = signatories.find((signatory) => signatory.signatory_name === value);
+            setFormData({
+                ...formData,
+                signatory: selectedSignatory ? selectedSignatory.id : '',
+                [name]: value
+            });
         } else {
             setFormData({
                 ...formData,
@@ -59,9 +60,20 @@ function AddSignatory() {
     const onSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post(`${config.apiUrl}/employee-signatories`, formData);
+            const { employee_name, signatory_name, ...formDataWithouthNames } = formData;
+            const selectedSignatory = signatories.find((signatory) => signatory.employee_name === signatory_name);
+            const payload = {
+                employee_id: formData.employee_id,
+                signatory: selectedSignatory ? selectedSignatory.id : '',
+                signatory_status: formData.signatory_status
+            }
+            const response = await axios.post(`${config.apiUrl}/employee-signatories`, payload);
             console.log('Response:', response.data);
-            // history.push('/employee-signatories');
+            setFormData({
+                employee_name: '',
+                signatory_name: '',
+                signatory_status: ''
+            });
         } catch (error) {
             console.error('Error creating signatory:', error);
             setErrorMessage(error.message);
@@ -101,32 +113,36 @@ function AddSignatory() {
                         </div>
 
                         <div className="form-group">
-                            <label>Signatory </label>
+                            <label>Higher Superior </label>
                             <select
                                 name="signatory_name"
-                                value={formData.employee_name}
+                                value={formData.signatory_name}
                                 onChange={handleInputChange}
                             >
                                 <option value="">Select Signatory</option>
                                 {signatories.length > 0 && (
                                     signatories.map((signatory) => (
-                                        <option key={signatory.id} value={signatory.signatory_name}>
-                                            {signatory.signatory_name}
+                                        <option key={signatory.id} value={signatory.employee_name}>
+                                            {signatory.employee_name}
                                         </option>
                                     ))
                                 )}
                             </select>
                         </div>
 
+
                         <div className="form-group">
                             <label>Signatory Status</label>
-                            <input
-                                type="text"
+                            <select
                                 name="signatory_status"
                                 value={formData.signatory_status}
                                 onChange={handleInputChange}
-                                placeholder="Signatory Status"
-                            />
+                            >
+                                <option value="">Select Signatory Status</option>
+                                <option value="Active">Active</option>
+                                <option value="Resigned">Resigned</option>
+                                <option value="AWOL">AWOL</option>
+                            </select>
                         </div>
 
                         <button type="submit">Submit</button>
