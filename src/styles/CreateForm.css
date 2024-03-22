@@ -1,5 +1,5 @@
 /* for src/pages/AddEmployee.js*/
-.create-employee-container {
+.create-form-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -11,7 +11,7 @@
   /* background-position: center; */
   }
 
-.create-employee-container {
+.create-form-container {
   background-color: #e7efe6;
   background-size: cover;
   background-position: center;
@@ -22,7 +22,7 @@
   padding: 0rem 2rem 2rem 5rem; 
 }
 
-.create-employee-container h2 {
+.create-form-container h2 {
   text-align: center;
   font-size: 40px;
   color: #355738;

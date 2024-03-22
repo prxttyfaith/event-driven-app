@@ -71,6 +71,27 @@ const Sidebar = () => {
                   <span className="sidebar-spaces">Employee List</span>
                   </Link>
               </li>
+              <li>
+                  <Link to="/employee-manager/add-signatory" onClick={e => e.stopPropagation()}>
+                  <span className="sidebar-spaces">Add Signatory</span>
+                  </Link>
+              </li>
+              <li>
+                  <Link to="/employee-manager/signatory-list" onClick={e => e.stopPropagation()}>
+                  <span className="sidebar-spaces">Signatory List</span>
+                  </Link>
+              </li>
+              <li>
+                  <Link to="/employee-manager/leave-request" onClick={e => e.stopPropagation()}>
+                  <span className="sidebar-spaces">Leave Request</span>
+                  </Link>
+              </li>
+              <li>
+                  <Link to="/employee-manager/leave-request-list" onClick={e => e.stopPropagation()}>
+                  <span className="sidebar-spaces">Leave Request List</span>
+                  </Link>
+              </li>
+
             </ul>
         )}
         </li>
