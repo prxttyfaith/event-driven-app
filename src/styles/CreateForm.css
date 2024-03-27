@@ -117,3 +117,61 @@ button[type="submit"]:hover {
 } */
 
 /* END of CreateEmployee */
+
+/* Close button */
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: #aaa;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+}
+
+/* Modal */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+@media (max-width: 600px) {
+  .modal-content {
+      width: 90%;
+  }
+}
+.input-container {
+  position: relative;
+}
+
+.error {
+  color: #FF5252;
+  font-size: 0.8em;
+  position: absolute;
+  top: 80%;
+  left: 0;
+  margin-top: 4px;
+}
+
+

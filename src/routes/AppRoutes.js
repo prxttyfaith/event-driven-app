@@ -10,7 +10,7 @@ import EmployeeList from '../pages/EmployeeList';
 import AddSignatory from '../pages/AddSignatory';
 import SignatoryList from '../pages/SignatoryList';
 import LeaveRequest from '../pages/LeaveRequest';
-import LeaveRequestList from '../pages/LeaveRequestList';
+import LeaveRequestStatus from '../pages/LeaveRequestStatus';
 
 const AppRoutes = () => { // Rename Routes to AppRoutes
   return (
@@ -23,7 +23,7 @@ const AppRoutes = () => { // Rename Routes to AppRoutes
       <Route path={PathConstants.ADDSIGNATORY} element={<AddSignatory />} />
       <Route path={PathConstants.SIGNATORYLIST} element={<SignatoryList />} />
       <Route path={PathConstants.LEAVEREQUEST} element={<LeaveRequest />} />
-      <Route path={PathConstants.LEAVEREQUESTLIST} element={<LeaveRequestList />} />
+      <Route path={PathConstants.LEAVEREQUESTSTATUS} element={<LeaveRequestStatus />} />
       <Route path="*" element={<Page404 />} />
     </Routes>
   );

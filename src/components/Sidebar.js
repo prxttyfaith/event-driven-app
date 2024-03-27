@@ -87,8 +87,8 @@ const Sidebar = () => {
                   </Link>
               </li>
               <li>
-                  <Link to="/employee-manager/leave-request-list" onClick={e => e.stopPropagation()}>
-                  <span className="sidebar-spaces">Leave Request List</span>
+                  <Link to="/employee-manager/leave-request-status" onClick={e => e.stopPropagation()}>
+                  <span className="sidebar-spaces">Leave Request Status</span>
                   </Link>
               </li>
 

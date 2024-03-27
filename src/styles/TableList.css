@@ -192,5 +192,16 @@
   color: #0D3D12; /* Change the text color to black */
   cursor: pointer;
   font-size: medium;
+ }
+
+.orange {
+    color: orange;
 }
-  /* END for src/Pages/EmployeeList.js */
+
+.green {
+    color: green;
+}
+
+.red {
+    color: red;
+}

@@ -9,7 +9,7 @@ const PathConstants = {
     ADDSIGNATORY: "/employee-manager/add-signatory",
     SIGNATORYLIST: "/employee-manager/signatory-list",
     LEAVEREQUEST: "/employee-manager/leave-request",
-    LEAVEREQUESTLIST: "/employee-manager/leave-request-list",
+    LEAVEREQUESTSTATUS: "/employee-manager/leave-request-status",
 };
 
 export default PathConstants;

@@ -3,23 +3,23 @@ import axios from 'axios';
 import '../styles/TableList.css';
 import Sidebar from '../components/Sidebar';
 import { useTable } from 'react-table';
-import EmployeeModal from '../components/EmployeeModal';
+// import EmployeeModal from '../components/EmployeeModal';
 import config from '../config';
 
 const SignatoryList = () => {
     const [signatories, setSignatories] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [editableFields, setEditableFields] = useState([]);
+    // const [loading, setLoading] = useState(true);
+    // const [editableFields, setEditableFields] = useState([]);
 
     useEffect(() => {
         const getSignatoryList = async () => {
           try {
             const response = await axios.get(`${config.apiUrl}/employee-signatories`);
             setSignatories(response.data.data);
-            setLoading(false);
+            // setLoading(false);
           } catch (error) {
             console.error('Error fetching data:', error);
-            setLoading(false);
+            // setLoading(false);
           }
         };
     
