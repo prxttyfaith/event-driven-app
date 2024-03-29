@@ -119,6 +119,16 @@ function LeaveRequest() {
         }
     };
 
+    const resetForm = () => {
+        setFormData({
+            employee_name: '',
+            type: '',
+            start_date: '',
+            end_date: '',
+            status: ''
+        });
+    };
+
     const closeModal = () => {
         setShowModal(false);
         setSuccessMessage('');
@@ -140,7 +150,6 @@ function LeaveRequest() {
                 <br />
                 <div>
                     <form onSubmit={onSubmit}>
-
                         <div className="form-group">
                             <label>Employee Name</label>
                             <div className="input-container">
@@ -164,14 +173,16 @@ function LeaveRequest() {
 
                         {formData.signatory_name && (
                             <div className="form-group">
-                            <label htmlFor="signatory_name">Signatory</label>
-                            <input
-                                // type="text" 
-                                name="signatory_name"
-                                value={formData.signatory_name}
-                                onChange={e => handleInputChange('signatory_name', e.target.value)}
-                                disabled
-                            />
+                                <label htmlFor="signatory_name">Signatory</label>
+                                <div className="input-container">
+                                    <input
+                                        // type="text" 
+                                        name="signatory_name"
+                                        value={formData.signatory_name}
+                                        onChange={e => handleInputChange('signatory_name', e.target.value)}
+                                        disabled
+                                    />
+                                </div>
                             </div>
                         )}
 
@@ -223,8 +234,11 @@ function LeaveRequest() {
                             {formErrors.end_date && <div className="error">{formErrors.end_date}</div>}
                             </div>
                         </div>
-
-                        <button type="submit">Submit</button>
+                        
+                        {/* <div className="form-end-buttons"> */}
+                            <button type="submit">Submit</button>
+                            <button type="button" className="cancel-button" onClick={resetForm}>Cancel</button>
+                        {/* </div> */}
                     </form>
                 </div>
                 {showModal && (

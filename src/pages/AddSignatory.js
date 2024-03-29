@@ -109,6 +109,14 @@ function AddSignatory() {
         }
     };
 
+    const resetForm = () => {
+        setFormData({
+            employee_name: '',
+            signatory_name: '',
+            signatory_status: ''
+        });
+      };
+
     const closeModal = () => {
         setShowModal(false);
         setSuccessMessage('');
@@ -189,7 +197,10 @@ function AddSignatory() {
                             </div>
                         </div>
     
-                        <button type="submit">Submit</button>
+                        <div className="form-end-buttons">
+                            <button type="submit">Submit</button>
+                            <button type="button" className="cancel-button" onClick={resetForm}>Cancel</button>
+                         </div>
                     </form>
                 </div>
                 {showModal && (

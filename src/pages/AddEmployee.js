@@ -277,8 +277,10 @@ function CreateEmployee() {
               </select>
             </div>
             <br />
-            <button type="submit">Submit</button>
-            <button type="button" className="cancel-button" onClick={resetForm}>Cancel</button>
+            {/* <div className="form-end-buttons"> */}
+              <button type="submit">Submit</button>
+              <button type="button" className="cancel-button" onClick={resetForm}>Cancel</button>
+            {/* </div> */}
           </form>
         </div>
       </div>
