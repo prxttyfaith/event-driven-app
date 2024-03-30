@@ -8,7 +8,7 @@ const EditModal = ({ isOpen, onClose, onSave, rowData }) => {
 
     useEffect(() => {
         // Populate editedData with rowData when the modal is opened
-        console.log("rowData:", rowData); // Log rowData here
+        console.log("Selected Row Data:", rowData); // Log rowData here
         setEditedData(rowData || {});
     }, [rowData]);
 
@@ -28,18 +28,23 @@ const EditModal = ({ isOpen, onClose, onSave, rowData }) => {
     };
 
     const handleFieldChange = (field, value) => {
-        // setEditedData(prevData => ({
-        //     ...prevData,
-        //     [field]: value
-        // }));
         let updatedData = {
             ...editedData,
             [field]: value
         };
+        const newSignatory = signatories.find(s => s.employee_name === updatedData.signatory_name);
+        if (newSignatory) {
+            updatedData = {
+                ...updatedData,
+                signatory_id: newSignatory.id
+            };
+        }
+        console.log('New Signatory: ', newSignatory);
 
         setEditedData(updatedData);
+        console.log('Updated Data: ', updatedData);
     };
-
+    
     const handleSave = (e) => {       
         e.preventDefault();
         const selectedSignatory = signatories.find(s => s.employee_name === editedData.employee_name);
@@ -62,19 +67,18 @@ const EditModal = ({ isOpen, onClose, onSave, rowData }) => {
                         <input
                             type="text"
                             value={rowData?.employee_name || ''}
-                            // onChange={(e) => handleFieldChange('employee_name', e.target.value)}
+                            readOnly
                         />
-                        disabled
                     </label>
                     <label>
                         Signatory Name:
                         <select
-                        name="employee_name"
-                        // value={''}
-                        onChange={(e) => handleFieldChange('employee_name', e.target.value)}
+                        name="signatory_name"
+                        value={editedData.signatory_name}
+                        onChange={(e) => handleFieldChange('signatory_name', e.target.value)}
                     >
 
-                            <option value="">Assign Signatory</option>
+                            {/* <option value="">Assign Signatory</option> */}
                             {signatories.length > 0 && (
                                 signatories.map((signatory) => (
                                     <option key={signatory.id} value={signatory.employee_name}>
@@ -96,10 +100,9 @@ const EditModal = ({ isOpen, onClose, onSave, rowData }) => {
                             <option value="Resigned">Resigned</option>
                         </select>
                     </label>
-
                     <button type="submit">Save</button>
-                    <button id="cancel-button" onClick={onClose}>Cancel</button>
                 </form>
+                <button id="cancel-button" onClick={onClose}>Cancel</button>
             </div>
         </div>
     );

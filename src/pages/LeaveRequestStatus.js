@@ -172,7 +172,7 @@ const LeaveRequestStatus = () => {
                     </table>
                 </div>
                 {successMessage && showModal && (
-                    <div className="modal" onClick={handleModalClick}>
+                    <div className={`edit-modal ${showModal ? 'show' : ''}`} onClick={handleModalClick}>
                         <div className="modal-content">
                             <span className="close" onClick={closeModal}>&times;</span>
                             <p>{successMessage}</p>

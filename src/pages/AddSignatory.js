@@ -197,10 +197,10 @@ function AddSignatory() {
                             </div>
                         </div>
     
-                        <div className="form-end-buttons">
+                        {/* <div className="form-end-buttons"> */}
                             <button type="submit">Submit</button>
                             <button type="button" className="cancel-button" onClick={resetForm}>Cancel</button>
-                         </div>
+                         {/* </div> */}
                     </form>
                 </div>
                 {showModal && (
