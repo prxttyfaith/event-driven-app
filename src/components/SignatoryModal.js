@@ -87,9 +87,9 @@ const EditModal = ({ isOpen, onClose, onSave, rowData }) => {
                     <label>
                         Status:
                         <select
-                            name="status"
-                            value={editedData.status}
-                            onChange={(e) => handleFieldChange('status', e.target.value)}
+                            name="signatory_status"
+                            value={editedData.signatory_status}
+                            onChange={(e) => handleFieldChange('signatory_status', e.target.value)}
                         >
                             <option value="">Select Status</option>
                             <option value="Active">Active</option>

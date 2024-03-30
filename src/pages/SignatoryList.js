@@ -46,23 +46,40 @@ const SignatoryList = () => {
                 signatory: editedData.id,
                 signatory_status: editedData.signatory_status
             };
-          // Make a PUT request to update employee data
-          console.log(payload)
-          await axios.put(`${config.apiUrl}/employee-signatories/${editedData.employee_id}`, payload);
-    
-          // Update the local state with the edited data
-          const updatedSignatories = signatories.map(sig =>
-            sig.employee_id === editedData.employee_id ? { ...sig, ...editedData } : sig
-          );
-          setSignatories(updatedSignatories);
-    
-          setIsEditModalOpen(false);
-          setSelectedRow(null);
-          setRowDataForEdit(null);
+            // Make a PUT request to update employee data
+            console.log(payload)
+            await axios.put(`${config.apiUrl}/employee-signatories/${editedData.employee_id}`, payload);
+
+            // Update the local state with the edited data
+            const updatedSignatories = signatories.map(sig =>
+                sig.employee_id === editedData.employee_id ? { ...sig, signatory_name: editedData.signatory_name, signatory_status: editedData.signatory_status } : sig
+            );
+            setSignatories(updatedSignatories);
+
+            setIsEditModalOpen(false);
+            setSelectedRow(null);
+            setRowDataForEdit(null);
         } catch (error) {
-          console.error('Error updating signatory:', error);
+            console.error('Error updating signatory:', error);
         }
-      };
+    };
+
+    const handleDelete = async (id) => {
+        const confirmDelete = window.confirm('Are you sure you want to delete this employee?');
+        if (confirmDelete) {
+            try {
+                // Make a DELETE request to delete employee data
+                await axios.delete(`${config.apiUrl}/employee-signatories/${id}`);
+
+                // Update the local state by removing the deleted employee
+                const updatedSignatories = signatories.filter(sig => sig.id !== id);
+                setSignatories(updatedSignatories);
+            } catch (error) {
+                console.error('Error deleting signatory:', error);
+            }
+        }
+    };
+
 
     const columns = useMemo(() => [
         {
