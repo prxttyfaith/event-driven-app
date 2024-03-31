@@ -1,5 +1,5 @@
 /* for src/Pages/EmployeeList.js */
-.employee-list-container {
+.table-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -11,40 +11,40 @@
   /* background-position: center; */
   }
   
-  .employee-list {
-  max-width: 1200px;
+  .table-list {
+  max-width: 1300px;
   margin: 5px;
-  padding: 20px 50px 20px 18px;
+  padding: 20px 30px 20px 20px;
   border: 1px solid #ccc;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   background-color: #fff;
   font-size: 13px;
-  overflow-x: auto;
+  /* overflow-x: auto; */
   
   }
 
-  .employee-list table {
+  .table-list table {
       width: 100%;
       max-width: 100%;
       border-collapse: collapse;
   }
   
-  .employee-list-container h2 {
+  .table-container h2 {
       text-align: center;
       font-size: 40px;
       color: #355738;
     }
 
   
-  .employee-list th,
-  .employee-list td {
+  .table-list th,
+  .table-list td {
   border: 1px solid #ccc;
   padding: 10px 10px 10px 10px;
   text-align: left;
   }
   
-  .employee-list th {
+  .table-list th {
   background-color: #E7EFE6;
   font-size: 14px;
   font-weight: bold;
@@ -56,15 +56,15 @@
   padding: 10px 10px 10px 10px
   }
   
-  .employee-list td {
+  .table-list td {
   text-align: left;
   }
   
-  .employee-list tbody tr:nth-child(even) {
+  .table-list tbody tr:nth-child(even) {
   background-color: #f9f9f9;
   }
   
-  .employee-list tbody tr:hover {
+  .table-list tbody tr:hover {
   background-color: #f0f0f0;
   }
 
@@ -192,5 +192,16 @@
   color: #0D3D12; /* Change the text color to black */
   cursor: pointer;
   font-size: medium;
+ }
+
+.orange {
+    color: orange;
 }
-  /* END for src/Pages/EmployeeList.js */
+
+.green {
+    color: green;
+}
+
+.red {
+    color: red;
+}

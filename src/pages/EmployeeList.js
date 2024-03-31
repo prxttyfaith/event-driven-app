@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect, useMemo } from 'react';
 import axios from 'axios';
-import '../styles/EmployeeList.css';
+import '../styles/TableList.css';
 import Sidebar from '../components/Sidebar';
 import { useTable } from 'react-table';
 import EmployeeModal from '../components/EmployeeModal';
@@ -160,15 +160,15 @@ const EmployeeList = () => {
   return (
     <div >
       <Sidebar />
-      <div className="employee-list-container">
+      <div className="table-container">
         <h2> Employee List</h2>
-        <div className="employee-list">
+        <div className="table-list">
           {/* <h2> Employee List</h2> */}
           {loading ? (
             <div>Loading...</div>
           ) : (
             <>
-              <table className="employee-list" {...getTableProps()}>
+              <table className="table-list" {...getTableProps()}>
                 <thead>
                   {headerGroups.map(headerGroup => (
                     <tr {...headerGroup.getHeaderGroupProps()}>

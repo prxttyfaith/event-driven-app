@@ -4,12 +4,14 @@ import axios from 'axios';
 
 const EditModal = ({ isOpen, onClose, onSave, rowData }) => {
     const [editedData, setEditedData] = useState({});
+    const [originalData, setOriginalData] = useState({});
     const [designations, setDesignations] = useState([]);
 
     useEffect(() => {
         // Populate editedData with rowData when the modal is opened
         console.log("rowData:", rowData); // Log rowData here
         setEditedData(rowData || {});
+        setOriginalData(rowData || {});
     }, [rowData]);
 
     useEffect(() => {
@@ -57,6 +59,11 @@ const EditModal = ({ isOpen, onClose, onSave, rowData }) => {
         editedData.designation_id = selectedDesignation.id;
     }
         onSave(editedData);
+        onClose();
+    };
+
+    const handleCancel = () => {
+        setEditedData(originalData);
         onClose();
     };
 
@@ -190,9 +197,9 @@ const EditModal = ({ isOpen, onClose, onSave, rowData }) => {
                         </select>
                     </label>
 
-                    <button type="submit">Save</button>
-                    <button id="cancel-button" onClick={onClose}>Cancel</button>
+                    <button type="submit">Save</button>               
                 </form>
+                <button id="cancel-button" onClick={handleCancel}>Cancel</button> 
             </div>
         </div>
     );

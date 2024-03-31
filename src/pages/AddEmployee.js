@@ -1,7 +1,7 @@
 // ./src/pages/AddEmployee.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import '../styles/AddEmployee.css';
+import '../styles/CreateForm.css';
 import Sidebar from '../components/Sidebar';
 import config from '../config';
 
@@ -113,7 +113,7 @@ function CreateEmployee() {
   return (
     <div >
       <Sidebar />
-      <div className="create-employee-container">
+      <div className="create-form-container">
         <h2>Employee Form</h2>
         {loading && <div>Loading...</div>}
         {errorMessage && <div className="error">{errorMessage}</div>}
@@ -277,8 +277,10 @@ function CreateEmployee() {
               </select>
             </div>
             <br />
-            <button type="submit">Submit</button>
-            <button type="button" className="cancel-button" onClick={resetForm}>Cancel</button>
+            {/* <div className="form-end-buttons"> */}
+              <button type="submit">Submit</button>
+              <button type="button" className="cancel-button" onClick={resetForm}>Cancel</button>
+            {/* </div> */}
           </form>
         </div>
       </div>
