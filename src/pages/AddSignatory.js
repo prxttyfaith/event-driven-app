@@ -203,8 +203,8 @@ function AddSignatory() {
                          {/* </div> */}
                     </form>
                 </div>
-                {showModal && (
-                    <div className="modal" onClick={handleModalClick}>
+                {successMessage && showModal && (
+                    <div className={`edit-modal ${showModal ? 'show' : ''}`} onClick={handleModalClick}>
                         <div className="modal-content">
                             <span className="close" onClick={closeModal}>&times;</span>
                             <p>{successMessage}</p>

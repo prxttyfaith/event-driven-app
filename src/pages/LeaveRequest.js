@@ -187,11 +187,11 @@ function LeaveRequest() {
                         )}
 
                         <div className="form-group">
-                            <label>Type</label>
+                            <label htmlFor="type">Type</label>
                             <div className="input-container">
                                 <select
                                     name="type"
-                                    value={formData.signatory_status}
+                                    value={formData.type}
                                     onChange={handleInputChange}
                                 >
                                     <option value="">Select Leave Type</option>
