@@ -18,7 +18,8 @@ function CreateEmployee() {
     zip_code: '',
     designation_id: '',
     employee_type: '',
-    status: ''
+    status: '',
+    gross_pay: ''
     // department_name: ''
   });
   const [loading, setLoading] = useState(false);
@@ -80,7 +81,8 @@ function CreateEmployee() {
         zip_code: '',
         designation_name: '',
         employee_type: '',
-        status: ''
+        status: '',
+        gross_pay: ''
       }); // Reset form fields upon successful submission
       setErrorMessage('');
       alert('Employee added successfully');
@@ -105,7 +107,8 @@ function CreateEmployee() {
       zip_code: '',
       designation_name: '',
       employee_type: '',
-      status: ''
+      status: '',
+      gross_pay: ''
       // department_name: ''
     });
   };
@@ -276,6 +279,18 @@ function CreateEmployee() {
                 <option value="AWOL">AWOL</option>
               </select>
             </div>
+            
+            <div className="form-group">
+              <label>Monthly Pay</label>
+              <input
+                type="text"
+                name="gross_pay"
+                value={formData.gross_pay}
+                onChange={handleInputChange}
+                placeholder="Gross Monthly Pay"
+              />
+            </div>
+
             <br />
             {/* <div className="form-end-buttons"> */}
               <button type="submit">Submit</button>
