@@ -283,7 +283,7 @@ function CreateEmployee() {
             <div className="form-group">
               <label>Monthly Pay</label>
               <input
-                type="text"
+                type="number"
                 name="gross_pay"
                 value={formData.gross_pay}
                 onChange={handleInputChange}
