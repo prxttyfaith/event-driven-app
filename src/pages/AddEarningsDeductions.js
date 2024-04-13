@@ -58,7 +58,6 @@ function AddEarningsDeductions() {
             setFormData({
                 ...formData,
                 employee_id: selectedEmployee ? selectedEmployee.employee_id : '',
-                signatory_name: selectedEmployee ? selectedEmployee.signatory_name : '',
                 [name]: value
             });
             setFormErrors({
@@ -83,21 +82,23 @@ function AddEarningsDeductions() {
         if (!formData.employee_name) {
             errors.employee_name = 'Please select an employee.';
         }
-        else if (!formData.earningsDeductions) {
+        if (!formData.earningsDeductions) {
             errors.earningsDeductions = 'Please select earnings or deductions.';
-        }
-        else if (!formData.earningsType) {
-            errors.earningsType = 'Please select earnings type.';
         } else {
-            errors.deductionsType = 'Please select deductions type.';
+            if (formData.earningsDeductions === 'add-earnings') {
+                if (!formData.earningsType) {
+                    errors.earningsType = 'Please select earnings type.';
+                }
+                else if (formData.earningsDeductions === 'add-deductions') {
+                    if (!formData.deductionsType) {
+                        errors.deductionsType = 'Please select deductions type.';
+                    }
+                }
+            }
         }
-        // if (!formData.deductionsType) {
-        //     errors.deductionsType = 'Please select deductions type.';
-        // }
-        else if (!formData.amount) {
+        if (!formData.amount) {
             errors.amount = 'Please enter amount.';
         }
-        
         // if (!formData.date) {
         //     errors.date = 'Please set date.';
         // }
@@ -119,7 +120,7 @@ function AddEarningsDeductions() {
                         employee_id: formData.employee_id,
                         type: formData.deductionsType,
                         amount: -Math.abs(formData.amount),
-                        date: formData.date
+                        date: formData.date || currentDate().toISOString().split('T')[0]
                     }
                     const response = await axios.post(`${config.apiUrl}/employee-payrolls/deductions`, payload);
                     // console.log('Response:', response.data);
@@ -137,7 +138,7 @@ function AddEarningsDeductions() {
                         employee_id: formData.employee_id,
                         type: formData.earningsType,
                         amount: formData.amount,
-                        date: formData.date
+                        date: formData.date || currentDate().toISOString().split('T')[0]
                     }
                     const response = await axios.post(`${config.apiUrl}/employee-payrolls/earnings`, payload);
                     // console.log('Response:', response.data);
