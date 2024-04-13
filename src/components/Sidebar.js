@@ -91,6 +91,11 @@ const Sidebar = () => {
                   <span className="sidebar-spaces">Leave Request Status</span>
                   </Link>
               </li>
+              <li>
+                  <Link to="/employee-manager/add-earnings-deductions" onClick={e => e.stopPropagation()}>
+                  <span className="sidebar-spaces">Earnings & Deductions</span>
+                  </Link>
+              </li>
 
             </ul>
         )}

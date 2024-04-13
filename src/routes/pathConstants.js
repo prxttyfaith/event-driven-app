@@ -10,6 +10,7 @@ const PathConstants = {
     SIGNATORYLIST: "/employee-manager/signatory-list",
     LEAVEREQUEST: "/employee-manager/leave-request",
     LEAVEREQUESTSTATUS: "/employee-manager/leave-request-status",
+    ADDEARNINGSDEDUCTIONS: "/employee-manager/add-earnings-deductions",
 };
 
 export default PathConstants;
