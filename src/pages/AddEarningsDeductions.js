@@ -21,8 +21,15 @@ function AddEarningsDeductions() {
         type: '',
         start_date: '',
         end_date: '',
-        status: ''
+        status: '',
+        earningsType: '',
+        deductionsType: '',
+        amount: '',
+        date: '',
+        earningsDeductions: '',
+        employee_name: ''
     });
+
     // const [loading, setLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
     const [employees, setEmployees] = useState([]);
@@ -41,7 +48,7 @@ function AddEarningsDeductions() {
 
     const fetchEmployeeSignatory = async () => {
         try {
-            const response = await axios.get(`${config.apiUrl}/employees/grosspay`);
+            const response = await axios.get(`${config.apiUrl}/employees/employee-pays`);
             // console.log('Employee Signatory:', response.data);
             setEmployees(response.data.data);
         } catch (error) {
@@ -198,14 +205,21 @@ function AddEarningsDeductions() {
                                     onChange={handleInputChange}
                                 >
                                     <option value="">Select Employee</option>
-                                    {employees.length > 0 && (
+                                    {/* {employees.length > 0 && (
                                         employees.map((employee) => (
                                             <option key={employee.id} value={employee.employee_name}>
                                                 {employee.employee_name}
                                             </option>
                                         ))
+                                    )} */}
+                                    {employees.length > 0 && (
+                                        employees.map((employee) => (
+                                            <option key={employee.employee_id} value={employee.employee_name}>
+                                                {employee.employee_name}
+                                            </option>
+                                        ))
                                     )}
-                                </select>
+                                                                    </select>
                                 {formErrors.employee_name && <div className="error">{formErrors.employee_name}</div>}
                             </div>
                         </div>
@@ -239,7 +253,7 @@ function AddEarningsDeductions() {
                                     >
                                         <option value="">Select Earning Type</option>
                                         <option value="overtime">Overtime</option>
-                                        <option value="ronus">Bonus</option>
+                                        <option value="bonus">Bonus</option>
                                         <option value="refund">Refund</option>
                                     </select>
                                     {formErrors.earningsType && <div className="error">{formErrors.earningsType}</div>}
@@ -260,7 +274,7 @@ function AddEarningsDeductions() {
                                     >
                                         <option value="">Select Deduction Type</option>
                                         <option value="absent">Absent</option>
-                                        <option value="cashAdvance">Cash Advance</option>
+                                        <option value="cash-advance">Cash Advance</option>
                                     </select>
                                     {formErrors.deductionsType && <div className="error">{formErrors.deductionsType}</div>}
                                 </div>

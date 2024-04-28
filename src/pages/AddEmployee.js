@@ -4,6 +4,10 @@ import axios from 'axios';
 import '../styles/CreateForm.css';
 import Sidebar from '../components/Sidebar';
 import config from '../config';
+import calculateMonthlyPagibigContribution from '../utils/PagibigContributionCalculator';
+import calculateMonthlyPhilHealthContribution from '../utils/PhilhealthContributionCalculator';
+import calculateMonthlySSSContribution from '../utils/SssContributionCalculator';
+import calculateMonthlyWithholdingTax from '../utils/WithholdingTaxCalculator';
 
 function CreateEmployee() {
   const [formData, setFormData] = useState({
@@ -19,8 +23,11 @@ function CreateEmployee() {
     designation_id: '',
     employee_type: '',
     status: '',
-    gross_pay: ''
-    // department_name: ''
+    salary: '',
+    pagibig: '',
+    philhealth: '',
+    sss: '',
+    wh_tax: ''
   });
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -29,6 +36,26 @@ function CreateEmployee() {
   useEffect(() => {
     fetchDesignations();
   }, []);
+
+  const setPagibigContribution = (salary) => {
+    const pagibigContribution = calculateMonthlyPagibigContribution(salary);
+    return pagibigContribution;
+  };
+
+  const setPhilhealthContribution = (salary) => {
+    const philhealthContribution = calculateMonthlyPhilHealthContribution(salary);
+    return philhealthContribution;
+  };
+
+  const setSSSContribution = (salary) => {
+    const sssContribution = calculateMonthlySSSContribution(salary);
+    return sssContribution;
+  };
+
+  const setWithholdingTax = (salary) => {
+    const withHoldingTax = calculateMonthlyWithholdingTax(salary);
+    return withHoldingTax;
+  };
 
   const fetchDesignations = async () => {
     try {
@@ -65,9 +92,15 @@ function CreateEmployee() {
     try {
       const selectedDesignation = designations.find((designation) => designation.designation_name === formData.designation_name);
       const designationId = selectedDesignation ? selectedDesignation.id : null;
-      const employeeData = { ...formData, designation_id: designationId };
-
-      const response = await axios.post(`${config.apiUrl}/employees`, employeeData);
+      const payload = {
+        ...formData, designation_id: designationId,
+        pagibig: setPagibigContribution((formData.salary)),
+        philhealth: setPhilhealthContribution((formData.salary)),
+        sss: setSSSContribution((formData.salary)),
+        wh_tax: setWithholdingTax((formData.salary))
+      };
+      // console.log('Employee data:', payload);
+      const response = await axios.post(`${config.apiUrl}/employees`, payload);
       console.log('Response:', response.data); // Optionally, handle response data
       setFormData({
         first_name: '',
@@ -82,10 +115,14 @@ function CreateEmployee() {
         designation_name: '',
         employee_type: '',
         status: '',
-        gross_pay: ''
+        salary: '',
+        pagibig: '',
+        philhealth: '',
+        sss: '',
+        wh_tax: ''     
       }); // Reset form fields upon successful submission
       setErrorMessage('');
-      alert('Employee added successfully');
+      alert('New Employee has been added successfully');
     } catch (error) {
       console.error('Error submitting employee:', error);
       setErrorMessage('Error submitting employee. Please try again.');
@@ -108,10 +145,14 @@ function CreateEmployee() {
       designation_name: '',
       employee_type: '',
       status: '',
-      gross_pay: ''
-      // department_name: ''
+      salary: '',
+      pagibig: '',
+      philhealth: '',
+      sss: '',
+      wh_tax: ''
     });
   };
+
 
   return (
     <div >
@@ -281,13 +322,13 @@ function CreateEmployee() {
             </div>
             
             <div className="form-group">
-              <label>Monthly Pay</label>
+              <label>Monthly Salary</label>
               <input
                 type="number"
-                name="gross_pay"
-                value={formData.gross_pay}
+                name="salary"
+                value={formData.salary}
                 onChange={handleInputChange}
-                placeholder="Gross Monthly Pay"
+                placeholder="Monthly Salary"
               />
             </div>
 
