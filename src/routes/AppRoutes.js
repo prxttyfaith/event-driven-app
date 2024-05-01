@@ -12,6 +12,8 @@ import SignatoryList from '../pages/SignatoryList';
 import LeaveRequest from '../pages/LeaveRequest';
 import LeaveRequestStatus from '../pages/LeaveRequestStatus';
 import AddEarningsDeductions from '../pages/AddEarningsDeductions';
+import GeneratePayroll from '../pages/GeneratePayroll';
+import EmployeePayslip from '../pages/EmployeePayslip';
 
 const AppRoutes = () => { // Rename Routes to AppRoutes
   return (
@@ -26,6 +28,8 @@ const AppRoutes = () => { // Rename Routes to AppRoutes
       <Route path={PathConstants.LEAVEREQUEST} element={<LeaveRequest />} />
       <Route path={PathConstants.LEAVEREQUESTSTATUS} element={<LeaveRequestStatus />} />
       <Route path={PathConstants.ADDEARNINGSDEDUCTIONS} element={<AddEarningsDeductions />} />
+      <Route path={PathConstants.GENERATEPAYROLL} element={<GeneratePayroll />} />
+      <Route path={PathConstants.EMPLOYEEPAYSLIP} element={<EmployeePayslip />} />
       <Route path="*" element={<Page404 />} />
     </Routes>
   );

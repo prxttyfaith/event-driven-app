@@ -96,6 +96,16 @@ const Sidebar = () => {
                   <span className="sidebar-spaces">Earnings & Deductions</span>
                   </Link>
               </li>
+              <li>
+                  <Link to="/employee-manager/generate-payroll" onClick={e => e.stopPropagation()}>
+                  <span className="sidebar-spaces">Generate Payroll</span>
+                  </Link>
+              </li>
+              <li>
+                  <Link to="/employee-manager/employee-payslip" onClick={e => e.stopPropagation()}>
+                  <span className="sidebar-spaces">Employee Payslip</span>
+                  </Link>
+              </li>
 
             </ul>
         )}
