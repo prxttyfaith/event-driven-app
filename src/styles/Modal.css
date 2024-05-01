@@ -14,8 +14,8 @@
 
 /* Modal content */
 .modal-content {
-    width: 80%;
-    max-width: 500px;
+    width: 100%;
+    max-width: 600px;
     background-color: #333; /* Change the modal background to dark */
     color: #fff; /* Change the text color to white */
     padding: 20px;

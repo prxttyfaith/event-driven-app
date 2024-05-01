@@ -15,6 +15,7 @@ const setDateTenthOfMonth = () => {
 };
 
 function EmployeePayslip() {
+    const [isSidebarVisible, setIsSidebarVisible] = useState(true); // State to control Sidebar visibility
     const [tableData, setTableData] = useState([]);
     const [isViewModalOpen, setIsViewModalOpen] = useState(false); // State to control View modal visibility
     const [selectedRow, setSelectedRow] = useState(null); // State to store selected row for Viewing
@@ -58,6 +59,9 @@ function EmployeePayslip() {
     };
 
     const handleView = (row) => {
+
+        setIsSidebarVisible(false);
+
         const employee_id = row.original.employee_id;
         const pay_period = 'semi-monthly';
         const pay_day = formData.pay_day;
@@ -164,7 +168,7 @@ function EmployeePayslip() {
     return (
         <>
             <div>
-                <Sidebar />
+                {isSidebarVisible && <Sidebar />}
                 {isTableVisible && (
                 <div className="table-container">
                     <h2>Employee Payslip</h2>
@@ -238,15 +242,16 @@ function EmployeePayslip() {
                  )}
             </div>
             <PayslipModal
-            isOpen={isViewModalOpen}
-            onClose={() => {
-                setIsViewModalOpen(false);
-                setIsTableVisible(true); // Show the table when the modal is closed
-            }}
-            rowData={rowDataForView}
-            ViewableFields={ViewableFields}
-            payslipData={payslipData} // Make sure to pass this prop
-        />
+                isOpen={isViewModalOpen}
+                onClose={() => {
+                    setIsViewModalOpen(false);
+                    setIsTableVisible(true); // Show the table when the modal is closed
+                    setIsSidebarVisible(true); // Show the Sidebar when the modal is closed
+                }}
+                rowData={rowDataForView}
+                ViewableFields={ViewableFields}
+                payslipData={payslipData} // Make sure to pass this prop
+            />
         </>
     );
 
