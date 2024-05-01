@@ -69,12 +69,12 @@
   }
 
 .edit-button,
-.delete-button {
+.delete-button,
+.view-button {
   margin: 2px 5px 5px 5px;
   /* margin-right: 5px;
   margin-bottom: 5px; */
   }
-
 
   /* edit employee modal */
   .edit-modal {
@@ -204,4 +204,35 @@
 
 .red {
     color: red;
+}
+
+.custom-form label,
+.input-container label{
+  width: 15%; /* Reduce the width */
+  padding: 10px 5px; /* Adjust the padding */
+  text-align: left;
+  font-size: 16px;
+}
+
+.custom-form input, 
+.custom-form select,
+.input-container select {
+  width: 35vw;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #0d3d12;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+/* Styling for arrow on Select */
+.custom-form select {
+  -webkit-appearance: none; /* Remove default arrow in Safari */
+  -moz-appearance: none; /* Remove default arrow in Firefox */
+  appearance: none; /* Remove default arrow */
+  background-image: url('data:image/svg+xml;utf8,<svg fill="%23424242" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>'); /* Custom arrow */
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 20px; /* Adjust size of the arrow */
+  padding-right: 30px; /* Ensure space for arrow */
 }

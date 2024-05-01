@@ -35,7 +35,7 @@ function GeneratePayrolls() {
         pay_day: ''
     });
     const [formData, setFormData] = useState({
-        pay_period: 'Semi-Monthly',
+        pay_period: 'semi-monthly',
         payroll_start_date: currentDateFirstOfMonth(),
         payroll_end_date: currentDateFifteenthOfMonth(),
         pay_day: currentDateTwentyFifthOfMonth()
@@ -218,7 +218,7 @@ function GeneratePayrolls() {
                 <div>
                     <form onSubmit={onSubmit}>
                         <div className="form-group">
-                            <label htmlFor="type">Payroll Period</label>
+                            <label htmlFor="pay_period">Payroll Period</label>
                             <div className="input-container">
                                 <select
                                     name="pay_period"
@@ -236,7 +236,7 @@ function GeneratePayrolls() {
                         </div>
 
                         <div className="form-group">
-                            <label htmlFor="date">Payroll Start Date</label>
+                            <label htmlFor="payroll_start_date">Payroll Start Date</label>
                             <div className="input-container">
                                 <select
                                     id="payroll_start_date"
@@ -253,7 +253,7 @@ function GeneratePayrolls() {
                         </div>
 
                         <div className="form-group">
-                            <label htmlFor="date">Payroll End Date</label>
+                            <label htmlFor="payroll_end_date">Payroll End Date</label>
                             <div className="input-container">
                                 <input
                                     id="payroll_end_date"
@@ -267,7 +267,7 @@ function GeneratePayrolls() {
                         </div>
 
                         <div className="form-group">
-                            <label htmlFor="date">Payroll Payday</label>
+                            <label htmlFor="pay_day">Payroll Payday</label>
                             <div className="input-container">
                                 <input
                                     id="pay_day"
