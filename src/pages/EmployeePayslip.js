@@ -23,6 +23,8 @@ function EmployeePayslip() {
     const [rowDataForView, setRowDataForView] = useState(null); // State to store data for Viewing
     const [dateOptions, setDateOptions] = useState([]);
     const [payslipData, setPayslipData] = useState(null);
+    const [earningsData, setEarningsData] = useState(null);
+    const [deductionsData, setDeductionsData] = useState(null);
     const [isTableVisible, setIsTableVisible] = useState(true);
     const [formErrors, setFormErrors] = useState({
         pay_day: ''
@@ -50,16 +52,25 @@ function EmployeePayslip() {
         setViewableFields(fields.filter(field => field !== 'view'));
       }, [columns]);
 
-    const handleFormChange = (event) => {
-        const { name, value } = event.target;
-        setFormData(prevState => ({
-            ...prevState,
-            [name]: value
-        }));
-    };
+
+    useEffect(() => {
+        const fetchData = async () => {
+            if (selectedRow && formData) {
+                const employee_id = selectedRow.original.employee_id;
+                const pay_period = 'semi-monthly';
+                const pay_day = formData.pay_day;
+                const { payslipData, earningsData, deductionsData } = await fetchPayslip(employee_id, pay_period, pay_day);
+                setPayslipData(payslipData);
+                setEarningsData(earningsData);
+                setDeductionsData(deductionsData);
+            }
+        };
+
+    fetchData();
+    }, [selectedRow, formData]);
+    
 
     const handleView = (row) => {
-
         setIsSidebarVisible(false);
 
         const employee_id = row.original.employee_id;
@@ -68,7 +79,9 @@ function EmployeePayslip() {
         if (employee_id && pay_period && pay_day) {
             fetchPayslip(employee_id, pay_period, pay_day)
                 .then(data => {
-                    setPayslipData(data); // Update payslipData with the fetched data
+                    setPayslipData(data.payslipData); // Update payslipData with the fetched data
+                    setEarningsData(data.earningsData); // Update earningsData with the fetched data
+                    setDeductionsData(data.deductionsData); // Update deductionsData with the fetched data
                     setSelectedRow(row);
                     setRowDataForView(row.original);
                     setIsViewModalOpen(true); // Open the modal after the data is fetched
@@ -251,6 +264,8 @@ function EmployeePayslip() {
                 rowData={rowDataForView}
                 ViewableFields={ViewableFields}
                 payslipData={payslipData} // Make sure to pass this prop
+                earningsData={earningsData} // Make sure to pass this prop
+                deductionsData={deductionsData} // Make sure to pass this prop
             />
         </>
     );

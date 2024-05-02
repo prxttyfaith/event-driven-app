@@ -2,20 +2,34 @@ import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import axios from 'axios';
 import config from '../config';
+import '../styles/Modal.css';
 
 const fetchPayslip = async (employee_id, pay_period, pay_day) => {
     try {
         const response = await axios.get(`${config.apiUrl}/employee-payrolls/payslip`, {
             params: { employee_id, pay_period, pay_day }
         });
-        return response.data.data; // Make sure this is the correct path to the data
+        if (response.data.data) {
+            return {
+                payslipData: response.data.data,
+                earningsData: response.data.earningsData,
+                deductionsData: response.data.deductionsData
+            };
+        } else {
+            console.error('No payslip data available.');
+            return null;
+        }
     } catch (error) {
         console.error('Error fetching payslip data:', error);
         return null; // Return null or appropriate default value on error
     }
 };
 
-const PayslipModal = ({ isOpen, onClose, rowData, payslipData }) => {
+const PayslipModal = ({ isOpen, onClose, rowData, payslipData, earningsData, deductionsData }) => {
+
+    // console.log('payslipData:', payslipData);
+    // console.log('earningsData:', earningsData);
+    // console.log('deductionsData:', deductionsData);
 
     let net_pay = payslipData && payslipData[0] ? (payslipData[0].basic_pay + payslipData[0].total_earnings) - Math.abs(payslipData[0].total_deductions) : 0;
 
@@ -26,29 +40,24 @@ const PayslipModal = ({ isOpen, onClose, rowData, payslipData }) => {
         document.title = originalTitle;
     };
 
-    // useEffect(() => {
-    //     // console.log("payslipData in Modal:", payslipData); 
-    //     // console.log('employee_name:', payslipData && payslipData[0] && payslipData[0].employee_name);
-    // }, [payslipData]);
-
     const formatCurrency = (value) => {
         return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'PHP' }).format(value);
     };
 
     return (
         <Modal
-            isOpen={isOpen}
-            onRequestClose={onClose}
-            contentLabel="Payslip Modal"
-            className="modal"
-        >
+    isOpen={isOpen}
+    onRequestClose={onClose}
+    contentLabel="Payslip Modal"
+    className="modal printModal"
+>
             {payslipData && payslipData[0] ? (
                 <div className="modal-content">
                     <div className="modal-header">
-                    <h1 className="modal-title" style={{ textAlign: 'center' }}>PAYSLIP</h1>
-                    <span className="modal-subtitle" style={{ textAlign: 'center', display: 'block', fontWeight: 'bold' }}>UNICODE CORPORATION</span>
-                    <span className="modal-subtitle" style={{ textAlign: 'center', display: 'block', fontWeight: 'bold' }}>Roxas Avenue, 8016 Davao City, Philippines</span>
+                    <h1 className="modal-title">PAYSLIP</h1>
                     <br />
+                    <span className="modal-subtitle">UNICODE CORPORATION</span>
+                    <span className="modal-subtitle">Roxas Avenue, 8016 Davao City, Philippines</span>
                     <br />
                     </div>
                     <div className="modal-body">
@@ -113,11 +122,62 @@ const PayslipModal = ({ isOpen, onClose, rowData, payslipData }) => {
                             )}
                         </tbody>
                     </table>
+
+                    <br />
+                    <h3 style={{ textAlign: 'left' }}>Earnings</h3>
+                    {earningsData && earningsData.length > 0 ? (
+                        <table style={{ borderCollapse: 'collapse', width: '100%' }}>
+                            <thead>
+                                <tr>
+                                    <th style={{ border: '1px solid black', textAlign: 'left' }}>Earning Type</th>
+                                    <th style={{ border: '1px solid black', textAlign: 'left' }}>Date</th>
+                                    <th style={{ border: '1px solid black', textAlign: 'right' }}>Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {earningsData.map((earning, index) => (
+                                    <tr key={index}>
+                                        <td style={{ border: '1px solid black', textAlign: 'left' }}>{earning.earning_type}</td>
+                                        <td style={{ border: '1px solid black', textAlign: 'left' }}>{new Date(earning.earning_date).toISOString().split('T')[0]}</td>
+                                        <td style={{ border: '1px solid black', textAlign: 'right' }}>{formatCurrency(earning.earning_amount)}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    ) : (
+                        <p>No earnings data available.</p>
+                    )}
+
+                    <br />
+                    <h3 style={{ textAlign: 'left' }}>Deductions</h3>
+                    {deductionsData && deductionsData.length > 0 ? (
+                        <table style={{ borderCollapse: 'collapse', width: '100%' }}>
+                            <thead>
+                                <tr>
+                                    <th style={{ border: '1px solid black', textAlign: 'left' }}>Deduction Type</th>
+                                    <th style={{ border: '1px solid black', textAlign: 'left' }}>Date</th>
+                                    <th style={{ border: '1px solid black', textAlign: 'right' }}>Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {deductionsData.map((deduction, index) => (
+                                    <tr key={index}>
+                                        <td style={{ border: '1px solid black', textAlign: 'left' }}>{deduction.deduction_type}</td>
+                                        <td style={{ border: '1px solid black', textAlign: 'left' }}>{new Date(deduction.deduction_date).toISOString().split('T')[0]}</td>
+                                        <td style={{ border: '1px solid black', textAlign: 'right' }}>{formatCurrency(deduction.deduction_amount)}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    ) : (
+                        <p>No deductions data available.</p>
+                    )}
+
                     <br />
                     </div>
                     <div className="modal-footer">
-                        <button onClick={printPayslip} className="modal-button">Print Payslip</button>
                         <button onClick={onClose} className="modal-button">Close</button>
+                        <button onClick={printPayslip} className="modal-button">Print Payslip</button>
                     </div>
                 </div>
             ) : (

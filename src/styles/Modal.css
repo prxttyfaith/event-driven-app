@@ -16,24 +16,41 @@
 .modal-content {
     width: 100%;
     max-width: 600px;
-    background-color: #333; /* Change the modal background to dark */
-    color: #fff; /* Change the text color to white */
+    background-color: #fff; /* Change the background color to white */
+    color: #333; /* Change the text color to a darker gray */
     padding: 20px;
     border-radius: 4px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    /* overflow: hidden; */
 }
 
 /* Modal header */
 .modal-header {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
 }
+
+/* .center-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+} */
 
 /* Modal title */
 .modal-title {
     margin: 0;
     font-size: 1.5em;
+    color: rgb(53, 87, 56); 
+}
+
+.modal-subtitle {
+    font-size: 16px;
+    color: #333; /* Dark gray color */
+    text-align: center;
+    margin-bottom: 10px;
 }
 
 /* Modal body */
@@ -53,13 +70,13 @@
     margin-left: 10px;
     padding: 10px 20px;
     border: none;
-    background-color: #007bff;
+    background-color: #f0ad4e;
     color: #fff;
     cursor: pointer;
 }
 
 .modal-button:hover {
-    background-color: #0056b3;
+    background-color: #f0ad4e;
 }
 
 /* Table styles */
@@ -68,12 +85,39 @@
     border-collapse: collapse;
 }
 
-.modal-body th, .modal-body td {
+.modal-body th {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    background-color: #E3E1D9;
+}
+
+.custom-table th {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
 }
 
-.modal-body tr:nth-child(even) {
+.modal-body td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+/* .modal-body tr:nth-child(even) {
     background-color: #f2f2f2;
+} */
+
+@media print {
+    body * {
+        visibility: hidden;
+    }
+    .modal, .modal * {
+        visibility: visible;
+    }
+    .modal {
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
 }
