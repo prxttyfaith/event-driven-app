@@ -31,7 +31,7 @@ const PayslipModal = ({ isOpen, onClose, rowData, payslipData, earningsData, ded
     // console.log('earningsData:', earningsData);
     // console.log('deductionsData:', deductionsData);
 
-    let net_pay = payslipData && payslipData[0] ? (payslipData[0].basic_pay + payslipData[0].total_earnings) - Math.abs(payslipData[0].total_deductions) : 0;
+    let net_pay = payslipData && payslipData[0] ? (payslipData[0].basic_pay + payslipData[0].total_earnings) - Math.abs(payslipData[0].total_deductions) - payslipData[0].sss - payslipData[0].philhealth - payslipData[0].pagibig : 0;
 
     const printPayslip = () => {
         const originalTitle = document.title;

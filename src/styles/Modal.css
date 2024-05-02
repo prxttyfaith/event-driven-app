@@ -120,4 +120,10 @@
         left: 0;
         top: 0;
     }
+    .modal-content {
+        overflow: hidden !important;
+    }
+    body {
+        overflow: hidden !important;
+    }
 }
