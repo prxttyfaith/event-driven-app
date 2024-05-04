@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import axios from 'axios';
-import '../styles/TableList.css';
-import Sidebar from '../components/Sidebar';
+import '../../styles/Main.css';
+import Sidebar from '../../components/Sidebar';
 import { useTable } from 'react-table';
-import config from '../config';
+import config from '../../config';
 
 const LeaveRequestStatus = () => {
     const [requests, setRequests] = useState([]);
@@ -145,7 +145,7 @@ const LeaveRequestStatus = () => {
         <div>
             <Sidebar />
             <div className="table-container">
-                <h2>Leave Request Status</h2>
+                <h2>LEAVE REQUEST STATUS</h2>
                 <div className="table-list">
                     <table className="table-list" {...getTableProps()}>
                         <thead>

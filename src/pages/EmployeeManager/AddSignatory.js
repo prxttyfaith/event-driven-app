@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import '../styles/CreateForm.css';
-import Sidebar from '../components/Sidebar';
-import config from '../config';
+import '../../styles/Main.css';
+import Sidebar from '../../components/Sidebar';
+import config from '../../config';
 
 function AddSignatory() {
     const [formData, setFormData] = useState({
@@ -131,15 +131,15 @@ function AddSignatory() {
     return (
         <div>
             <Sidebar />
-            <div className="create-form-container">
-                <h2>Signatory Form</h2>
+            <div className="table-container">
+                <h2>SIGNATORY FORM</h2>
                 {/* {loading && <div>Loading...</div>} */}
                 {errorMessage && <div className="error">{errorMessage}</div>}
                 <br />
                 <div>
                     <form onSubmit={onSubmit}>
                         <div className="form-group">
-                            <label>Employee Name</label>
+                            <label htmlFor="right-align">Employee Name</label>
                             <div className="input-container">
                                 <select
                                     name="employee_name"
@@ -160,7 +160,7 @@ function AddSignatory() {
                         </div>
     
                         <div className="form-group">
-                            <label>Higher Superior</label>
+                            <label htmlFor="right-align">Higher Superior</label>
                             <div className="input-container">
                                 <select
                                     name="signatory_name"
@@ -181,7 +181,7 @@ function AddSignatory() {
                         </div>
     
                         <div className="form-group">
-                            <label>Signatory Status</label>
+                            <label htmlFor="right-align">Signatory Status</label>
                             <div className="input-container">
                                 <select
                                     name="signatory_status"
@@ -197,10 +197,12 @@ function AddSignatory() {
                             </div>
                         </div>
     
-                        {/* <div className="form-end-buttons"> */}
+                        <div className="form-group">
                             <button type="submit">Submit</button>
+                        </div>
+                        <div className="form-group">
                             <button type="button" className="cancel-button" onClick={resetForm}>Cancel</button>
-                         {/* </div> */}
+                        </div>
                     </form>
                 </div>
                 {successMessage && showModal && (

@@ -108,9 +108,10 @@ const EditModal = ({ isOpen, onClose, onSave, rowData }) => {
                             <option value="Resigned">Resigned</option>
                         </select>
                     </label>
-                    <button type="submit">Save</button>
+
+                    <button type="submit">Save</button>   
+                    <button id="cancel-button" onClick={handleCancel}>Cancel</button>             
                 </form>
-                <button id="cancel-button" onClick={handleCancel}>Cancel</button>
             </div>
         </div>
     );

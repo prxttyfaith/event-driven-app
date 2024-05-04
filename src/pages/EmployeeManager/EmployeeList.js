@@ -1,11 +1,15 @@
 
 import React, { useState, useEffect, useMemo } from 'react';
 import axios from 'axios';
-import '../styles/TableList.css';
-import Sidebar from '../components/Sidebar';
+import '../../styles/Main.css';
+import Sidebar from '../../components/Sidebar';
 import { useTable } from 'react-table';
-import EmployeeModal from '../components/EmployeeModal';
-import config from '../config';
+import EmployeeModal from '../../components/EmployeeModal';
+import config from '../../config';
+import calculateMonthlyPagibigContribution from '../../utils/PagibigContributionCalculator';
+import calculateMonthlyPhilHealthContribution from '../../utils/PhilhealthContributionCalculator';
+import calculateMonthlySSSContribution from '../../utils/SssContributionCalculator';
+import calculateMonthlyWithholdingTax from '../../utils/WithholdingTaxCalculator';
 
 const EmployeeList = () => {
   const [loading, setLoading] = useState(true);
@@ -36,6 +40,26 @@ const EmployeeList = () => {
     setEditableFields(fields.filter(field => field !== 'actions'));
   }, [columns]);
 
+  const setPagibigContribution = (salary) => {
+    const pagibigContribution = calculateMonthlyPagibigContribution(salary);
+    return pagibigContribution;
+  };
+
+  const setPhilhealthContribution = (salary) => {
+    const philhealthContribution = calculateMonthlyPhilHealthContribution(salary);
+    return philhealthContribution;
+  };
+
+  const setSSSContribution = (salary) => {
+    const sssContribution = calculateMonthlySSSContribution(salary);
+    return sssContribution;
+  };
+
+  const setWithholdingTax = (salary) => {
+    const withHoldingTax = calculateMonthlyWithholdingTax(salary);
+    return withHoldingTax;
+  };
+
   const handleEdit = (row) => {
     setSelectedRow(row);
     setRowDataForEdit(row.original);
@@ -44,12 +68,27 @@ const EmployeeList = () => {
 
   const handleSave = async (editedData) => {
     try {
+      // Calculate contributions and taxes based on the salary
+      const pagibig = setPagibigContribution(editedData.salary);
+      const philhealth = setPhilhealthContribution(editedData.salary);
+      const sss = setSSSContribution(editedData.salary);
+      const wh_tax = setWithholdingTax(editedData.salary);
+
+      // Add the new data to the editedData object
+      const updatedData = {
+        ...editedData,
+        pagibig,
+        philhealth,
+        sss,
+        wh_tax
+      };
+
       // Make a PUT request to update employee data
-      await axios.put(`${config.apiUrl}/employees/${editedData.id}`, editedData);
+      await axios.put(`${config.apiUrl}/employees/${updatedData.id}`, updatedData);
 
       // Update the local state with the edited data
       const updatedEmployees = employees.map(emp =>
-        emp.id === editedData.id ? { ...emp, ...editedData } : emp
+        emp.id === updatedData.id ? { ...emp, ...updatedData } : emp
       );
       setEmployees(updatedEmployees);
 
@@ -127,6 +166,10 @@ const EmployeeList = () => {
       accessor: 'department_name',
     },
     {
+      Header: 'Monthly Salary',
+      accessor: 'salary',
+    },
+    {
       Header: 'Type',
       accessor: 'employee_type',
     },
@@ -161,7 +204,7 @@ const EmployeeList = () => {
     <div >
       <Sidebar />
       <div className="table-container">
-        <h2> Employee List</h2>
+        <h2> EMPLOYEE LIST</h2>
         <div className="table-list">
           {/* <h2> Employee List</h2> */}
           {loading ? (

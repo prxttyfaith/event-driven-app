@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import '../styles/CreateForm.css';
-import Sidebar from '../components/Sidebar';
-import config from '../config';
+import '../../styles/Main.css';
+import Sidebar from '../../components/Sidebar';
+import config from '../../config';
 
 function LeaveRequest() {
     const [formData, setFormData] = useState({
@@ -143,15 +143,15 @@ function LeaveRequest() {
     return (
         <div>
             <Sidebar />
-            <div className="create-form-container">
-                <h2>Leave Request Form</h2>
+            <div className="table-container">
+                <h2>LEAVE REQUEST FORM</h2>
                 {/* {loading && <div>Loading...</div>} */}
                 {errorMessage && <div className="error">{errorMessage}</div>}
                 <br />
                 <div>
                     <form onSubmit={onSubmit}>
                         <div className="form-group">
-                            <label>Employee Name</label>
+                            <label htmlFor="right-align">Employee Name</label>
                             <div className="input-container">
                                 <select
                                     name="employee_name"
@@ -173,7 +173,7 @@ function LeaveRequest() {
 
                         {formData.signatory_name && (
                             <div className="form-group">
-                                <label htmlFor="signatory_name">Signatory</label>
+                                <label htmlFor="right-align">Signatory</label>
                                 <div className="input-container">
                                     <input
                                         // type="text" 
@@ -187,7 +187,7 @@ function LeaveRequest() {
                         )}
 
                         <div className="form-group">
-                            <label htmlFor="type">Type</label>
+                            <label htmlFor="right-align">Leave Type</label>
                             <div className="input-container">
                                 <select
                                     name="type"
@@ -205,7 +205,7 @@ function LeaveRequest() {
                         </div>
 
                         <div className="form-group">
-                            <label htmlFor="start_date">Start Date</label>
+                            <label htmlFor="right-align">Start Date</label>
                             <div className="input-container">
                                 <input
                                     id="start_date"
@@ -220,7 +220,7 @@ function LeaveRequest() {
                         </div>
 
                         <div className="form-group">
-                            <label htmlFor="end_date">End Date</label>
+                            <label htmlFor="right-align">End Date</label>
                             <div className="input-container">
                                 <input
                                     id="end_date"
@@ -235,10 +235,12 @@ function LeaveRequest() {
                             </div>
                         </div>
                         
-                        {/* <div className="form-end-buttons"> */}
+                        <div className="form-group">
                             <button type="submit">Submit</button>
+                        </div>
+                        <div className="form-group">
                             <button type="button" className="cancel-button" onClick={resetForm}>Cancel</button>
-                        {/* </div> */}
+                        </div>
                     </form>
                 </div>
                 {showModal && (

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import '../styles/CreateForm.css';
-import Sidebar from '../components/Sidebar';
-import config from '../config';
+import '../../styles/Main.css';
+import Sidebar from '../../components/Sidebar';
+import config from '../../config';
+import { Rings as Loader } from 'react-loader-spinner';
 
 // Default values
 const currentDateTwentyFifthOfMonth = () => {
@@ -28,6 +29,7 @@ function GeneratePayrolls() {
     const [successMessage, setSuccessMessage] = useState('');
     const [showModal, setShowModal] = useState(false);
     const [dateOptions, setDateOptions] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
     const [formErrors, setFormErrors] = useState({
         pay_period: '',
         payroll_start_date: '',
@@ -35,7 +37,7 @@ function GeneratePayrolls() {
         pay_day: ''
     });
     const [formData, setFormData] = useState({
-        pay_period: 'semi-monthly',
+        pay_period: 'Semi-Monthly',
         payroll_start_date: currentDateFirstOfMonth(),
         payroll_end_date: currentDateFifteenthOfMonth(),
         pay_day: currentDateTwentyFifthOfMonth()
@@ -135,40 +137,15 @@ function GeneratePayrolls() {
         //     errors.payroll_start_date = 'Please select start date to ensure that the payroll is generated for the correct period.';
         // }
 
-        console.log('Errors:', errors);
+        // console.log('Errors:', errors);
         setFormErrors(errors);
         return Object.keys(errors).length === 0;
     };
 
-    // const onSubmit = async (e) => {
-    //     e.preventDefault();
-    //     if (validateForm()) {
-    //         try {
-    //             const payload = {
-    //                 pay_period: formData.pay_period,
-    //                 payroll_start_date: formData.payroll_start_date,
-    //                 payroll_end_date: formData.payroll_end_date,
-    //                 pay_day: formData.pay_day
-    //             };
-    //             const response = await axios.post(`${config.apiUrl}/employee-payrolls`, payload);
-    //             setSuccessMessage(response.data.message);
-    //             setShowModal(true);
-    //             setFormData({
-    //                 pay_period: '',
-    //                 payroll_start_date: currentDateFirstOfMonth(),
-    //                 payroll_end_date: currentDateFifteenthOfMonth(),
-    //                 pay_day: currentDateTwentyFifthOfMonth()
-    //             });
-    //         } catch (error) {
-    //             console.error('Error on form submission:', error);
-    //             setErrorMessage(error.message);
-    //         }
-    //     }
-    // };
-
     const onSubmit = async (e) => {
         e.preventDefault();
         if (validateForm()) {
+            setIsLoading(true);
             try {
                 const payload = {
                     pay_period: formData.pay_period,
@@ -176,14 +153,19 @@ function GeneratePayrolls() {
                     payroll_end_date: formData.payroll_end_date,
                     pay_day: formData.pay_day
                 };
-                const response = await axios.post(`${config.apiUrl}/employee-payrolls`, payload);
-                setSuccessMessage(response.data.message);
-                setShowModal(true);
-                localStorage.setItem('pay_period', formData.pay_period);
-                localStorage.setItem('payroll_start_date', formData.payroll_start_date);
+                setTimeout(async () => {
+                    const response = await axios.post(`${config.apiUrl}/employee-payrolls`, payload);
+                    setSuccessMessage(response.data.message);
+                    setShowModal(true);
+                    localStorage.setItem('pay_period', formData.pay_period);
+                    localStorage.setItem('payroll_start_date', formData.payroll_start_date);
+                    // Set loading state to false after API call
+                    setIsLoading(false);
+                }, 5000);
             } catch (error) {
                 console.error('Error on form submission:', error);
                 setErrorMessage(error.message);
+                setIsLoading(false);
             }
         }
     };
@@ -211,14 +193,14 @@ function GeneratePayrolls() {
     return (
         <div>
             <Sidebar />
-            <div className="create-form-container">
-                <h2>Generate Payroll</h2>
+            <div className="table-container">
+                <h2>GENERATE PAYROLL</h2>
                 {errorMessage && <div className="error">{errorMessage}</div>}
                 <br />
                 <div>
                     <form onSubmit={onSubmit}>
                         <div className="form-group">
-                            <label htmlFor="pay_period">Payroll Period</label>
+                            <label htmlFor="right-align">Payroll Period</label>
                             <div className="input-container">
                                 <select
                                     name="pay_period"
@@ -226,17 +208,17 @@ function GeneratePayrolls() {
                                     onChange={handleInputChange}
                                 >
                                     {/* <option value="">Select Payroll Period</option> */}
-                                    <option value="weekly" disabled>Weekly</option>
-                                    <option value="bi-weekly" disabled>Bi-Weekly</option>
-                                    <option value="semi-monthly">Semi-Monthly</option>
-                                    <option value="monthly" disabled>Monthly</option>
+                                    <option value="Weekly" disabled>Weekly</option>
+                                    <option value="Bi-Weekly" disabled>Bi-Weekly</option>
+                                    <option value="Semi-Monthly">Semi-Monthly</option>
+                                    <option value="Monthly" disabled>Monthly</option>
                                 </select>
                                 {formErrors.pay_period && <div className="error">{formErrors.pay_period}</div>}
                             </div>
                         </div>
 
                         <div className="form-group">
-                            <label htmlFor="payroll_start_date">Payroll Start Date</label>
+                            <label htmlFor="right-align">Payroll Start Date</label>
                             <div className="input-container">
                                 <select
                                     id="payroll_start_date"
@@ -253,7 +235,7 @@ function GeneratePayrolls() {
                         </div>
 
                         <div className="form-group">
-                            <label htmlFor="payroll_end_date">Payroll End Date</label>
+                            <label htmlFor="right-align">Payroll End Date</label>
                             <div className="input-container">
                                 <input
                                     id="payroll_end_date"
@@ -267,7 +249,7 @@ function GeneratePayrolls() {
                         </div>
 
                         <div className="form-group">
-                            <label htmlFor="pay_day">Payroll Payday</label>
+                            <label htmlFor="right-align">Payroll Payday</label>
                             <div className="input-container">
                                 <input
                                     id="pay_day"
@@ -280,8 +262,19 @@ function GeneratePayrolls() {
                             </div>
                         </div>
 
-                        <button type="submit">Generate Payroll</button>
-                        <button type="button" className="cancel-button" onClick={resetForm}>Reset</button>
+                        <div className="form-group">
+                            <button type="submit" disabled={isLoading}>
+                                {isLoading ? (
+                                    <div className="loading-container" style={{ flexDirection: 'row' }}>
+                                        <span>Generating payroll...</span>
+                                        <Loader color="#00BFFF" height={30} width={30} />
+                                    </div>
+                                ) : 'Generate Payroll'}
+                            </button>
+                        </div>
+                        <div className="form-group">
+                            <button className="cancel-button" onClick={resetForm}>Reset</button>
+                        </div>
                     </form>
                 </div>
                 {showModal && (
