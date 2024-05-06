@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import config from '../config';
 
 const EditModal = ({ isOpen, onClose, onSave, rowData }) => {
     const [editedData, setEditedData] = useState({});
@@ -20,7 +21,7 @@ const EditModal = ({ isOpen, onClose, onSave, rowData }) => {
 
     const fetchSignatories = async () => {
         try {
-            const response = await axios.get('http://localhost:3000/employee-signatories/signatory');
+            const response = await axios.get(`${config.apiUrl}/employee-signatories/signatory`);
             console.log('Signatories:', response.data);
             setSignatories(response.data.data);
         } catch (error) {
@@ -107,9 +108,10 @@ const EditModal = ({ isOpen, onClose, onSave, rowData }) => {
                             <option value="Resigned">Resigned</option>
                         </select>
                     </label>
-                    <button type="submit">Save</button>
+
+                    <button type="submit">Save</button>   
+                    <button id="cancel-button" onClick={handleCancel}>Cancel</button>             
                 </form>
-                <button id="cancel-button" onClick={handleCancel}>Cancel</button>
             </div>
         </div>
     );

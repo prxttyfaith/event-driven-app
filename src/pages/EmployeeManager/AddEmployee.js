@@ -1,9 +1,13 @@
 // ./src/pages/AddEmployee.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import '../styles/CreateForm.css';
-import Sidebar from '../components/Sidebar';
-import config from '../config';
+import '../../styles/Main.css';
+import Sidebar from '../../components/Sidebar';
+import config from '../../config';
+import calculateMonthlyPagibigContribution from '../../utils/PagibigContributionCalculator';
+import calculateMonthlyPhilHealthContribution from '../../utils/PhilhealthContributionCalculator';
+import calculateMonthlySSSContribution from '../../utils/SssContributionCalculator';
+import calculateMonthlyWithholdingTax from '../../utils/WithholdingTaxCalculator';
 
 function CreateEmployee() {
   const [formData, setFormData] = useState({
@@ -19,8 +23,11 @@ function CreateEmployee() {
     designation_id: '',
     employee_type: '',
     status: '',
-    gross_pay: ''
-    // department_name: ''
+    salary: '',
+    pagibig: '',
+    philhealth: '',
+    sss: '',
+    wh_tax: ''
   });
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -29,6 +36,26 @@ function CreateEmployee() {
   useEffect(() => {
     fetchDesignations();
   }, []);
+
+  const setPagibigContribution = (salary) => {
+    const pagibigContribution = calculateMonthlyPagibigContribution(salary);
+    return pagibigContribution;
+  };
+
+  const setPhilhealthContribution = (salary) => {
+    const philhealthContribution = calculateMonthlyPhilHealthContribution(salary);
+    return philhealthContribution;
+  };
+
+  const setSSSContribution = (salary) => {
+    const sssContribution = calculateMonthlySSSContribution(salary);
+    return sssContribution;
+  };
+
+  const setWithholdingTax = (salary) => {
+    const withHoldingTax = calculateMonthlyWithholdingTax(salary);
+    return withHoldingTax;
+  };
 
   const fetchDesignations = async () => {
     try {
@@ -65,9 +92,15 @@ function CreateEmployee() {
     try {
       const selectedDesignation = designations.find((designation) => designation.designation_name === formData.designation_name);
       const designationId = selectedDesignation ? selectedDesignation.id : null;
-      const employeeData = { ...formData, designation_id: designationId };
-
-      const response = await axios.post(`${config.apiUrl}/employees`, employeeData);
+      const payload = {
+        ...formData, designation_id: designationId,
+        pagibig: setPagibigContribution((formData.salary)),
+        philhealth: setPhilhealthContribution((formData.salary)),
+        sss: setSSSContribution((formData.salary)),
+        wh_tax: setWithholdingTax((formData.salary))
+      };
+      // console.log('Employee data:', payload);
+      const response = await axios.post(`${config.apiUrl}/employees`, payload);
       console.log('Response:', response.data); // Optionally, handle response data
       setFormData({
         first_name: '',
@@ -82,10 +115,14 @@ function CreateEmployee() {
         designation_name: '',
         employee_type: '',
         status: '',
-        gross_pay: ''
+        salary: '',
+        pagibig: '',
+        philhealth: '',
+        sss: '',
+        wh_tax: ''     
       }); // Reset form fields upon successful submission
       setErrorMessage('');
-      alert('Employee added successfully');
+      alert('New Employee has been added successfully');
     } catch (error) {
       console.error('Error submitting employee:', error);
       setErrorMessage('Error submitting employee. Please try again.');
@@ -108,23 +145,27 @@ function CreateEmployee() {
       designation_name: '',
       employee_type: '',
       status: '',
-      gross_pay: ''
-      // department_name: ''
+      salary: '',
+      pagibig: '',
+      philhealth: '',
+      sss: '',
+      wh_tax: ''
     });
   };
+
 
   return (
     <div >
       <Sidebar />
-      <div className="create-form-container">
-        <h2>Employee Form</h2>
+      <div className="table-container">
+        <h2>EMPLOYEE FORM</h2>
         {loading && <div>Loading...</div>}
         {errorMessage && <div className="error">{errorMessage}</div>}
         <br />
         <div>
           <form onSubmit={onSubmit}>
             <div className="form-group">
-              <label>First Name</label>
+              <label htmlFor="right-align">First Name</label>
               <input
                 type="text"
                 name="first_name"
@@ -135,7 +176,7 @@ function CreateEmployee() {
             </div>
 
             <div className="form-group">
-              <label>Middle Name</label>
+              <label htmlFor="right-align">Middle Name</label>
               <input
                 type="text"
                 name="middle_name"
@@ -146,7 +187,7 @@ function CreateEmployee() {
             </div>
 
             <div className="form-group">
-              <label>Last Name</label>
+              <label htmlFor="right-align">Last Name</label>
               <input
                 type="text"
                 name="last_name"
@@ -157,7 +198,7 @@ function CreateEmployee() {
             </div>
 
             <div className="form-group">
-              <label>Birthdate</label>
+              <label htmlFor="right-align">Birthdate</label>
               <input
                 type="date"
                 name="birthdate"
@@ -168,7 +209,7 @@ function CreateEmployee() {
             </div>
 
             <div className="form-group">
-              <label>Address Line</label>
+              <label htmlFor="right-align">Address Line</label>
               <input
                 type="text"
                 name="address_line"
@@ -179,7 +220,7 @@ function CreateEmployee() {
             </div>
 
             <div className="form-group">
-              <label>City</label>
+              <label htmlFor="right-align">City</label>
               <input
                 type="text"
                 name="city"
@@ -190,7 +231,7 @@ function CreateEmployee() {
             </div>
 
             <div className="form-group">
-              <label>Province</label>
+              <label htmlFor="right-align">Province</label>
               <input
                 type="text"
                 name="state"
@@ -201,7 +242,7 @@ function CreateEmployee() {
             </div>
 
             <div className="form-group">
-              <label>Country</label>
+              <label htmlFor="right-align">Country</label>
               <input
                 type="text"
                 name="country"
@@ -212,7 +253,7 @@ function CreateEmployee() {
             </div>
 
             <div className="form-group">
-              <label>Zip Code</label>
+              <label htmlFor="right-align">Zip Code</label>
               <input
                 type="text"
                 name="zip_code"
@@ -223,7 +264,7 @@ function CreateEmployee() {
             </div>
 
             <div className="form-group">
-              <label>Designation</label>
+              <label htmlFor="right-align">Designation</label>
               <select
                 name="designation_name"
                 value={formData.designation_name}
@@ -242,7 +283,7 @@ function CreateEmployee() {
 
               {formData.department_name && (
                 <div className="form-group">
-                  <label htmlFor="department_name">Department:</label>
+                  <label htmlFor="right-align">Department</label>
                   <input
                     // type="text" 
                     name="department_name"
@@ -254,7 +295,7 @@ function CreateEmployee() {
               )}
 
             <div className="form-group">
-              <label>Employee Type</label>
+              <label htmlFor="right-align">Employee Type</label>
               <select
                 name="employee_type"
                 value={formData.employee_type}
@@ -267,7 +308,7 @@ function CreateEmployee() {
             </div>
 
             <div className="form-group">
-              <label>Status</label>
+              <label htmlFor="right-align">Status</label>
               <select
                 name="status"
                 value={formData.status}
@@ -281,21 +322,22 @@ function CreateEmployee() {
             </div>
             
             <div className="form-group">
-              <label>Monthly Pay</label>
+              <label htmlFor="right-align">Monthly Salary</label>
               <input
-                type="text"
-                name="gross_pay"
-                value={formData.gross_pay}
+                type="number"
+                name="salary"
+                value={formData.salary}
                 onChange={handleInputChange}
-                placeholder="Gross Monthly Pay"
+                placeholder="Monthly Salary"
               />
             </div>
 
-            <br />
-            {/* <div className="form-end-buttons"> */}
-              <button type="submit">Submit</button>
+            <div className="form-group">
+                <button type="submit">Submit</button>
+            </div>
+            <div className="form-group">
               <button type="button" className="cancel-button" onClick={resetForm}>Cancel</button>
-            {/* </div> */}
+            </div>
           </form>
         </div>
       </div>

@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import config from '../config';
 
 const EditModal = ({ isOpen, onClose, onSave, rowData }) => {
     const [editedData, setEditedData] = useState({});
@@ -9,7 +10,7 @@ const EditModal = ({ isOpen, onClose, onSave, rowData }) => {
 
     useEffect(() => {
         // Populate editedData with rowData when the modal is opened
-        console.log("rowData:", rowData); // Log rowData here
+        // console.log("rowData:", rowData); // Log rowData here
         setEditedData(rowData || {});
         setOriginalData(rowData || {});
     }, [rowData]);
@@ -20,7 +21,7 @@ const EditModal = ({ isOpen, onClose, onSave, rowData }) => {
 
     const fetchDesignations = async () => {
         try {
-            const response = await axios.get('http://localhost:3000/employee-designations');
+            const response = await axios.get(`${config.apiUrl}/employee-designations`);
             console.log('Designations:', response.data);
             setDesignations(response.data.data);
         } catch (error) {
@@ -172,6 +173,14 @@ const EditModal = ({ isOpen, onClose, onSave, rowData }) => {
                         />
                     </label>
                     <label>
+                        Monthly Salary:
+                        <input
+                            type="number"
+                            value={editedData?.salary || ''}
+                            onChange={(e) => handleFieldChange('salary', e.target.value)}
+                        />
+                    </label>
+                    <label>
                         Type:
                         <select
                             name="employee_type"
@@ -197,9 +206,9 @@ const EditModal = ({ isOpen, onClose, onSave, rowData }) => {
                         </select>
                     </label>
 
-                    <button type="submit">Save</button>               
+                    <button type="submit">Save</button>
+                    <button id="cancel-button" onClick={handleCancel}>Cancel</button>              
                 </form>
-                <button id="cancel-button" onClick={handleCancel}>Cancel</button> 
             </div>
         </div>
     );

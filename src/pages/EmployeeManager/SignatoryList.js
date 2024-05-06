@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import axios from 'axios';
-import '../styles/TableList.css';
-import Sidebar from '../components/Sidebar';
+import '../../styles/Main.css';
+import Sidebar from '../../components/Sidebar';
 import { useTable } from 'react-table';
-import config from '../config';
-import SignatoryModal from '../components/SignatoryModal';
+import config from '../../config';
+import SignatoryModal from '../../components/SignatoryModal';
 
 const SignatoryList = () => {
     const [signatories, setSignatories] = useState([]);
@@ -126,7 +126,7 @@ const SignatoryList = () => {
         <div>
             <Sidebar />
             <div className="table-container">
-                <h2>Signatories</h2>
+                <h2>SIGNATORIES</h2>
                 <div className="table-list">
                     {/* Table goes here */}
                     <table className="table-list" {...getTableProps()}>
