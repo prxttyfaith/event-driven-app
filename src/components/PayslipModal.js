@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import axios from 'axios';
 import config from '../config';
-import '../styles/Modal.css';
+// import '../styles/Modal.css';
+import '../styles/Main.css';
 
 const fetchPayslip = async (employee_id, pay_period, pay_day) => {
     try {
@@ -16,26 +17,22 @@ const fetchPayslip = async (employee_id, pay_period, pay_day) => {
                 deductionsData: response.data.deductionsData
             };
         } else {
-            console.error('No payslip data available.');
+            console.log('No payslip data available.');
             return null;
         }
     } catch (error) {
-        console.error('Error fetching payslip data:', error);
-        return null; // Return null or appropriate default value on error
+        console.log('Error fetching payslip data:', error);
+        return null;
     }
 };
 
-const PayslipModal = ({ isOpen, onClose, rowData, payslipData, earningsData, deductionsData }) => {
-
-    // console.log('payslipData:', payslipData);
-    // console.log('earningsData:', earningsData);
-    // console.log('deductionsData:', deductionsData);
-
-    let net_pay = payslipData && payslipData[0] ? (payslipData[0].basic_pay + payslipData[0].total_earnings) - Math.abs(payslipData[0].total_deductions) - payslipData[0].sss - payslipData[0].philhealth - payslipData[0].pagibig : 0;
+const PayslipModal = ({ isOpen, onClose, payslipData, earningsData, deductionsData }) => {
+    // Calcualte Net pay
+    let net_pay = payslipData ? (payslipData[0].basic_pay + payslipData[0].total_earnings) - Math.abs(payslipData[0].total_deductions) - payslipData[0].sss - payslipData[0].philhealth - payslipData[0].pagibig : 0;
 
     const printPayslip = () => {
         const originalTitle = document.title;
-        document.title = 'Payslip_' + payslipData[0].employee_name + '_' + payslipData[0].pay_period + '_' + payslipData[0].pay_day;
+        document.title = 'Payslip_' + payslipData[0].employee_name + '_' + payslipData[0].pay_period + '_Pay_Date_' + payslipData[0].pay_day;
         window.print();
         document.title = originalTitle;
     };
@@ -46,19 +43,22 @@ const PayslipModal = ({ isOpen, onClose, rowData, payslipData, earningsData, ded
 
     return (
         <Modal
-    isOpen={isOpen}
-    onRequestClose={onClose}
-    contentLabel="Payslip Modal"
-    className="modal printModal"
->
+            isOpen={isOpen}
+            onRequestClose={onClose}
+            className="modal-content"
+            // className="modal-content"
+            contentLabel="Payslip Modal"
+            overlayClassName="modal"
+            shouldCloseOnOverlayClick={true}            
+        >
             {payslipData && payslipData[0] ? (
                 <div className="modal-content">
-                    <div className="modal-header">
-                    <h1 className="modal-title">PAYSLIP</h1>
-                    <br />
-                    <span className="modal-subtitle">UNICODE CORPORATION</span>
-                    <span className="modal-subtitle">Roxas Avenue, 8016 Davao City, Philippines</span>
-                    <br />
+                        <div className="modal-header">
+                        <h1 className="modal-title">PAYSLIP</h1>
+                        <br />
+                        <span className="modal-subtitle">UNICODE CORPORATION</span>
+                        <span className="modal-subtitle">Roxas Avenue, 8016 Davao City, Philippines</span>
+
                     </div>
                     <div className="modal-body">
                     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -81,7 +81,7 @@ const PayslipModal = ({ isOpen, onClose, rowData, payslipData, earningsData, ded
                             <span>: {new Date(payslipData[0].start_date).toISOString().split('T')[0]}</span>
                             <span style={{ textAlign: 'right', marginRight: '15px' }}>End Date</span>
                             <span>: {new Date(payslipData[0].end_date).toISOString().split('T')[0]}</span>
-                            <span style={{ textAlign: 'right', marginRight: '15px' }}>Pay Day</span>
+                            <span style={{ textAlign: 'right', marginRight: '15px' }}>Pay Date</span>
                             <span>: {new Date(payslipData[0].pay_day).toISOString().split('T')[0]}</span>
                         </div>
                     </div>
@@ -124,12 +124,12 @@ const PayslipModal = ({ isOpen, onClose, rowData, payslipData, earningsData, ded
                     </table>
 
                     <br />
-                    <h3 style={{ textAlign: 'left' }}>Earnings</h3>
+                    <h3 style={{ textAlign: 'left' }}>Add'l Earnings Summary</h3>
                     {earningsData && earningsData.length > 0 ? (
                         <table style={{ borderCollapse: 'collapse', width: '100%' }}>
                             <thead>
                                 <tr>
-                                    <th style={{ border: '1px solid black', textAlign: 'left' }}>Earning Type</th>
+                                    <th style={{ border: '1px solid black', textAlign: 'left' }}>Earnings</th>
                                     <th style={{ border: '1px solid black', textAlign: 'left' }}>Date</th>
                                     <th style={{ border: '1px solid black', textAlign: 'right' }}>Amount</th>
                                 </tr>
@@ -145,16 +145,16 @@ const PayslipModal = ({ isOpen, onClose, rowData, payslipData, earningsData, ded
                             </tbody>
                         </table>
                     ) : (
-                        <p>No earnings data available.</p>
+                        <p>No additional earnings.</p>
                     )}
 
                     <br />
-                    <h3 style={{ textAlign: 'left' }}>Deductions</h3>
+                    <h3 style={{ textAlign: 'left' }}>Deductions Summary</h3>
                     {deductionsData && deductionsData.length > 0 ? (
                         <table style={{ borderCollapse: 'collapse', width: '100%' }}>
                             <thead>
                                 <tr>
-                                    <th style={{ border: '1px solid black', textAlign: 'left' }}>Deduction Type</th>
+                                    <th style={{ border: '1px solid black', textAlign: 'left' }}>Deductions</th>
                                     <th style={{ border: '1px solid black', textAlign: 'left' }}>Date</th>
                                     <th style={{ border: '1px solid black', textAlign: 'right' }}>Amount</th>
                                 </tr>
@@ -170,14 +170,14 @@ const PayslipModal = ({ isOpen, onClose, rowData, payslipData, earningsData, ded
                             </tbody>
                         </table>
                     ) : (
-                        <p>No deductions data available.</p>
+                        <p>No deductions.</p>
                     )}
 
                     <br />
                     </div>
                     <div className="modal-footer">
-                        <button onClick={onClose} className="modal-button">Close</button>
-                        <button onClick={printPayslip} className="modal-button">Print Payslip</button>
+                        <button onClick={onClose} className="close-button">Close</button>
+                        <button onClick={printPayslip} className="print-button">Download</button>
                     </div>
                 </div>
             ) : (

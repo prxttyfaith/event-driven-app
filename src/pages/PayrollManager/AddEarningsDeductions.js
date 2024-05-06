@@ -2,9 +2,9 @@
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import '../styles/CreateForm.css';
-import Sidebar from '../components/Sidebar';
-import config from '../config';
+import '../../styles/Main.css';
+import Sidebar from '../../components/Sidebar';
+import config from '../../config';
 
 function AddEarningsDeductions() {
     // let currentDate = new Date();
@@ -189,15 +189,15 @@ function AddEarningsDeductions() {
     return (
         <div>
             <Sidebar />
-            <div className="create-form-container">
-                <h2>Add Earnings Or Deductions</h2>
+            <div className="table-container">
+                <h2>ADD EARNINGS | DEDUCTIONS</h2>
                 {/* {loading && <div>Loading...</div>} */}
                 {errorMessage && <div className="error">{errorMessage}</div>}
                 <br />
                 <div>
                     <form onSubmit={onSubmit}>
                         <div className="form-group">
-                            <label>Employee Name</label>
+                            <label htmlFor="right-align">Employee Name</label>
                             <div className="input-container">
                                 <select
                                     name="employee_name"
@@ -225,7 +225,7 @@ function AddEarningsDeductions() {
                         </div>
 
                         <div className="form-group">
-                            <label htmlFor="earningsDeductions">Earnings/Deductions</label>
+                            <label htmlFor="right-align">Earnings/Deductions</label>
                             <div className="input-container">
                                 <select
                                     name="earningsDeductions"
@@ -244,7 +244,7 @@ function AddEarningsDeductions() {
                         {formData.earningsDeductions === 'add-earnings' && (
 
                             <div className="form-group">
-                                <label htmlFor="earningsType">Earning Type</label>
+                                <label htmlFor="right-align">Earning Type</label>
                                 <div className="input-container">
                                     <select
                                         name="earningsType"
@@ -252,9 +252,9 @@ function AddEarningsDeductions() {
                                         onChange={handleInputChange}
                                     >
                                         <option value="">Select Earning Type</option>
-                                        <option value="overtime">Overtime</option>
-                                        <option value="bonus">Bonus</option>
-                                        <option value="refund">Refund</option>
+                                        <option value="Overtime">Overtime</option>
+                                        <option value="Bonus">Bonus</option>
+                                        <option value="Refund">Refund</option>
                                     </select>
                                     {formErrors.earningsType && <div className="error">{formErrors.earningsType}</div>}
                                 </div>
@@ -265,7 +265,7 @@ function AddEarningsDeductions() {
                         {formData.earningsDeductions === 'add-deductions' && (
 
                             <div className="form-group">
-                                <label htmlFor="deductionsType">Deduction Type</label>
+                                <label htmlFor="right-align">Deduction Type</label>
                                 <div className="input-container">
                                     <select
                                         name="deductionsType"
@@ -273,8 +273,8 @@ function AddEarningsDeductions() {
                                         onChange={handleInputChange}
                                     >
                                         <option value="">Select Deduction Type</option>
-                                        <option value="absent">Absent</option>
-                                        <option value="cash-advance">Cash Advance</option>
+                                        <option value="Absent">Absent</option>
+                                        <option value="Cash Advance">Cash Advance</option>
                                     </select>
                                     {formErrors.deductionsType && <div className="error">{formErrors.deductionsType}</div>}
                                 </div>
@@ -282,7 +282,7 @@ function AddEarningsDeductions() {
                         )}
 
                         <div className="form-group">
-                            <label htmlFor="amount">Amount</label>
+                            <label htmlFor="right-align">Amount</label>
                             <div className="input-container">
                                 <input
                                     type="number"
@@ -296,7 +296,7 @@ function AddEarningsDeductions() {
                         </div>
 
                         <div className="form-group">
-                            <label htmlFor="date">Date</label>
+                            <label htmlFor="right-align">Date</label>
                             <div className="input-container">
                                 <input
                                     id="date"
@@ -309,10 +309,12 @@ function AddEarningsDeductions() {
                             </div>
                         </div>
 
-                        {/* <div className="form-end-buttons"> */}
-                        <button type="submit">Submit</button>
-                        <button type="button" className="cancel-button" onClick={resetForm}>Cancel</button>
-                        {/* </div> */}
+                        <div className="form-group">
+                            <button type="submit">Submit</button>
+                        </div>
+                        <div className="form-group">
+                            <button type="button" className="cancel-button" onClick={resetForm}>Cancel</button>
+                        </div>
                     </form>
                 </div>
                 {showModal && (
